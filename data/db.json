@@ -1,0 +1,519 @@
+{
+  "contacts": [
+    {
+      "id": "c_demo_919876543210",
+      "phone": "919876543210",
+      "name": "Raj Mehta",
+      "status": "booked",
+      "createdAt": "2026-05-25T08:55:06.457Z",
+      "lastContactAt": "2026-05-26T06:55:06.457Z"
+    },
+    {
+      "id": "c_demo_919811223344",
+      "phone": "919811223344",
+      "name": "Priya Singh",
+      "status": "hot",
+      "createdAt": "2026-05-24T08:55:06.457Z",
+      "lastContactAt": "2026-05-26T04:55:06.457Z"
+    },
+    {
+      "id": "c_demo_919988776655",
+      "phone": "919988776655",
+      "name": "Amit Kumar",
+      "status": "warm",
+      "createdAt": "2026-05-23T08:55:06.457Z",
+      "lastContactAt": "2026-05-26T02:55:06.457Z"
+    },
+    {
+      "id": "c_demo_919777888999",
+      "phone": "919777888999",
+      "name": "Sneha Patel",
+      "status": "not_interested",
+      "createdAt": "2026-05-21T08:55:06.457Z",
+      "lastContactAt": "2026-05-25T22:55:06.457Z"
+    },
+    {
+      "id": "c_demo_919666555444",
+      "phone": "919666555444",
+      "name": "Vikram Sharma",
+      "status": "cold",
+      "createdAt": "2026-05-19T08:55:06.457Z",
+      "lastContactAt": "2026-05-25T18:55:06.457Z"
+    },
+    {
+      "id": "c_demo_919555444333",
+      "phone": "919555444333",
+      "name": "Deepika Nair",
+      "status": "booked",
+      "createdAt": "2026-05-16T08:55:06.457Z",
+      "lastContactAt": "2026-05-25T12:55:06.457Z"
+    },
+    {
+      "id": "c_demo_919444333222",
+      "phone": "919444333222",
+      "name": "Rohit Joshi",
+      "status": "warm",
+      "createdAt": "2026-05-14T08:55:06.457Z",
+      "lastContactAt": "2026-05-25T08:55:06.457Z"
+    },
+    {
+      "id": "c_demo_919333222111",
+      "phone": "919333222111",
+      "name": "Ananya Reddy",
+      "status": "hot",
+      "createdAt": "2026-05-22T08:55:06.457Z",
+      "lastContactAt": "2026-05-26T00:55:06.457Z"
+    }
+  ],
+  "conversations": [
+    {
+      "id": "cv_demo_919876543210",
+      "contactId": "c_demo_919876543210",
+      "contactPhone": "919876543210",
+      "contactName": "Raj Mehta",
+      "status": "booked",
+      "messageCount": 9,
+      "lastMessageAt": "2026-05-26T06:55:06.457Z",
+      "lastMessage": "Yes sure I'll book it",
+      "createdAt": "2026-05-25T08:55:06.457Z",
+      "isRead": true
+    },
+    {
+      "id": "cv_demo_919811223344",
+      "contactId": "c_demo_919811223344",
+      "contactPhone": "919811223344",
+      "contactName": "Priya Singh",
+      "status": "hot",
+      "messageCount": 8,
+      "lastMessageAt": "2026-05-26T08:55:25.264Z",
+      "lastMessage": "nice",
+      "createdAt": "2026-05-24T08:55:06.457Z",
+      "isRead": true
+    },
+    {
+      "id": "cv_demo_919988776655",
+      "contactId": "c_demo_919988776655",
+      "contactPhone": "919988776655",
+      "contactName": "Amit Kumar",
+      "status": "warm",
+      "messageCount": 5,
+      "lastMessageAt": "2026-05-26T02:55:06.457Z",
+      "lastMessage": "Getting consistent leads honestly",
+      "createdAt": "2026-05-23T08:55:06.457Z",
+      "isRead": true
+    },
+    {
+      "id": "cv_demo_919777888999",
+      "contactId": "c_demo_919777888999",
+      "contactPhone": "919777888999",
+      "contactName": "Sneha Patel",
+      "status": "not_interested",
+      "messageCount": 6,
+      "lastMessageAt": "2026-05-25T22:55:06.457Z",
+      "lastMessage": "Totally understand! No worries at all. Feel free to reach out whenever you're re",
+      "createdAt": "2026-05-21T08:55:06.457Z",
+      "isRead": true
+    },
+    {
+      "id": "cv_demo_919666555444",
+      "contactId": "c_demo_919666555444",
+      "contactPhone": "919666555444",
+      "contactName": "Vikram Sharma",
+      "status": "cold",
+      "messageCount": 3,
+      "lastMessageAt": "2026-05-25T18:55:06.457Z",
+      "lastMessage": "Just browsing",
+      "createdAt": "2026-05-19T08:55:06.457Z",
+      "isRead": true
+    },
+    {
+      "id": "cv_demo_919555444333",
+      "contactId": "c_demo_919555444333",
+      "contactPhone": "919555444333",
+      "contactName": "Deepika Nair",
+      "status": "booked",
+      "messageCount": 7,
+      "lastMessageAt": "2026-05-25T12:55:06.457Z",
+      "lastMessage": "Booked for Thursday!",
+      "createdAt": "2026-05-16T08:55:06.457Z",
+      "isRead": true
+    },
+    {
+      "id": "cv_demo_919444333222",
+      "contactId": "c_demo_919444333222",
+      "contactPhone": "919444333222",
+      "contactName": "Rohit Joshi",
+      "status": "warm",
+      "messageCount": 5,
+      "lastMessageAt": "2026-05-25T08:55:06.457Z",
+      "lastMessage": "Cold outreach is killing us, very low conversion",
+      "createdAt": "2026-05-14T08:55:06.457Z",
+      "isRead": true
+    },
+    {
+      "id": "cv_demo_919333222111",
+      "contactId": "c_demo_919333222111",
+      "contactPhone": "919333222111",
+      "contactName": "Ananya Reddy",
+      "status": "hot",
+      "messageCount": 7,
+      "lastMessageAt": "2026-05-26T00:55:06.457Z",
+      "lastMessage": "Sending me the link to book",
+      "createdAt": "2026-05-22T08:55:06.457Z",
+      "isRead": true
+    }
+  ],
+  "messages": [
+    {
+      "id": "m_demo_919876543210_0",
+      "conversationId": "cv_demo_919876543210",
+      "from": "customer",
+      "content": "Hi, I saw your ad about AI for business",
+      "timestamp": "2026-05-26T06:28:06.457Z"
+    },
+    {
+      "id": "m_demo_919876543210_1",
+      "conversationId": "cv_demo_919876543210",
+      "from": "bot",
+      "content": "Hey Raj! 👋 Thanks for reaching out to Vireon AI. What kind of business do you run?",
+      "timestamp": "2026-05-26T06:31:06.457Z"
+    },
+    {
+      "id": "m_demo_919876543210_2",
+      "conversationId": "cv_demo_919876543210",
+      "from": "customer",
+      "content": "I run a digital marketing agency, about 3 years old",
+      "timestamp": "2026-05-26T06:34:06.457Z"
+    },
+    {
+      "id": "m_demo_919876543210_3",
+      "conversationId": "cv_demo_919876543210",
+      "from": "bot",
+      "content": "That's great! What's your biggest challenge right now when it comes to getting new clients?",
+      "timestamp": "2026-05-26T06:37:06.457Z"
+    },
+    {
+      "id": "m_demo_919876543210_4",
+      "conversationId": "cv_demo_919876543210",
+      "from": "customer",
+      "content": "We get leads but they don't respond or we lose track of follow ups",
+      "timestamp": "2026-05-26T06:40:06.457Z"
+    },
+    {
+      "id": "m_demo_919876543210_5",
+      "conversationId": "cv_demo_919876543210",
+      "from": "bot",
+      "content": "I totally get that. Are you currently running any ads on Meta or Google?",
+      "timestamp": "2026-05-26T06:43:06.457Z"
+    },
+    {
+      "id": "m_demo_919876543210_6",
+      "conversationId": "cv_demo_919876543210",
+      "from": "customer",
+      "content": "Yes Meta ads mostly, spending about 50k per month",
+      "timestamp": "2026-05-26T06:46:06.457Z"
+    },
+    {
+      "id": "m_demo_919876543210_7",
+      "conversationId": "cv_demo_919876543210",
+      "from": "bot",
+      "content": "Perfect. We automate your entire lead follow-up with AI — so no lead ever slips through. Would you be open to a quick 20-min call to see if it's a fit?\n\nBook your free call here: https://calendly.com/vireon-ai",
+      "timestamp": "2026-05-26T06:49:06.457Z"
+    },
+    {
+      "id": "m_demo_919876543210_8",
+      "conversationId": "cv_demo_919876543210",
+      "from": "customer",
+      "content": "Yes sure I'll book it",
+      "timestamp": "2026-05-26T06:52:06.457Z"
+    },
+    {
+      "id": "m_demo_919811223344_0",
+      "conversationId": "cv_demo_919811223344",
+      "from": "customer",
+      "content": "Hello, interested in AI automation",
+      "timestamp": "2026-05-26T04:34:06.457Z"
+    },
+    {
+      "id": "m_demo_919811223344_1",
+      "conversationId": "cv_demo_919811223344",
+      "from": "bot",
+      "content": "Hey Priya! 👋 Thanks for reaching out to Vireon AI. What kind of business do you run?",
+      "timestamp": "2026-05-26T04:37:06.457Z"
+    },
+    {
+      "id": "m_demo_919811223344_2",
+      "conversationId": "cv_demo_919811223344",
+      "from": "customer",
+      "content": "Real estate agency, we deal in commercial properties",
+      "timestamp": "2026-05-26T04:40:06.457Z"
+    },
+    {
+      "id": "m_demo_919811223344_3",
+      "conversationId": "cv_demo_919811223344",
+      "from": "bot",
+      "content": "That's great! What's your biggest challenge right now when it comes to getting new clients?",
+      "timestamp": "2026-05-26T04:43:06.457Z"
+    },
+    {
+      "id": "m_demo_919811223344_4",
+      "conversationId": "cv_demo_919811223344",
+      "from": "customer",
+      "content": "Too many leads, not enough time to follow up manually",
+      "timestamp": "2026-05-26T04:46:06.457Z"
+    },
+    {
+      "id": "m_demo_919811223344_5",
+      "conversationId": "cv_demo_919811223344",
+      "from": "bot",
+      "content": "I totally get that. Are you currently running any ads on Meta or Google?",
+      "timestamp": "2026-05-26T04:49:06.457Z"
+    },
+    {
+      "id": "m_demo_919811223344_6",
+      "conversationId": "cv_demo_919811223344",
+      "from": "customer",
+      "content": "Both actually, Google for search and Meta for retargeting",
+      "timestamp": "2026-05-26T04:52:06.457Z"
+    },
+    {
+      "id": "m_demo_919988776655_0",
+      "conversationId": "cv_demo_919988776655",
+      "from": "customer",
+      "content": "Hey what does your service do exactly?",
+      "timestamp": "2026-05-26T02:40:06.457Z"
+    },
+    {
+      "id": "m_demo_919988776655_1",
+      "conversationId": "cv_demo_919988776655",
+      "from": "bot",
+      "content": "Hey Amit! 👋 We build AI agents that qualify your leads on WhatsApp and book appointments automatically. What kind of business do you run?",
+      "timestamp": "2026-05-26T02:43:06.457Z"
+    },
+    {
+      "id": "m_demo_919988776655_2",
+      "conversationId": "cv_demo_919988776655",
+      "from": "customer",
+      "content": "I have a coaching business, life coaching",
+      "timestamp": "2026-05-26T02:46:06.457Z"
+    },
+    {
+      "id": "m_demo_919988776655_3",
+      "conversationId": "cv_demo_919988776655",
+      "from": "bot",
+      "content": "Nice! What's your biggest challenge right now when it comes to getting new clients?",
+      "timestamp": "2026-05-26T02:49:06.457Z"
+    },
+    {
+      "id": "m_demo_919988776655_4",
+      "conversationId": "cv_demo_919988776655",
+      "from": "customer",
+      "content": "Getting consistent leads honestly",
+      "timestamp": "2026-05-26T02:52:06.457Z"
+    },
+    {
+      "id": "m_demo_919777888999_0",
+      "conversationId": "cv_demo_919777888999",
+      "from": "customer",
+      "content": "Hi",
+      "timestamp": "2026-05-25T22:37:06.457Z"
+    },
+    {
+      "id": "m_demo_919777888999_1",
+      "conversationId": "cv_demo_919777888999",
+      "from": "bot",
+      "content": "Hey Sneha! 👋 Thanks for reaching out to Vireon AI. What kind of business do you run?",
+      "timestamp": "2026-05-25T22:40:06.457Z"
+    },
+    {
+      "id": "m_demo_919777888999_2",
+      "conversationId": "cv_demo_919777888999",
+      "from": "customer",
+      "content": "Small bakery, just wanted to know prices",
+      "timestamp": "2026-05-25T22:43:06.457Z"
+    },
+    {
+      "id": "m_demo_919777888999_3",
+      "conversationId": "cv_demo_919777888999",
+      "from": "bot",
+      "content": "That's lovely! We specialize in AI lead automation for service businesses. What challenges do you face getting new customers?",
+      "timestamp": "2026-05-25T22:46:06.457Z"
+    },
+    {
+      "id": "m_demo_919777888999_4",
+      "conversationId": "cv_demo_919777888999",
+      "from": "customer",
+      "content": "Not really interested, too expensive for me probably",
+      "timestamp": "2026-05-25T22:49:06.457Z"
+    },
+    {
+      "id": "m_demo_919777888999_5",
+      "conversationId": "cv_demo_919777888999",
+      "from": "bot",
+      "content": "Totally understand! No worries at all. Feel free to reach out whenever you're ready. Best of luck with the bakery! 🎂",
+      "timestamp": "2026-05-25T22:52:06.457Z"
+    },
+    {
+      "id": "m_demo_919666555444_0",
+      "conversationId": "cv_demo_919666555444",
+      "from": "customer",
+      "content": "Saw your ad",
+      "timestamp": "2026-05-25T18:46:06.457Z"
+    },
+    {
+      "id": "m_demo_919666555444_1",
+      "conversationId": "cv_demo_919666555444",
+      "from": "bot",
+      "content": "Hey Vikram! 👋 Thanks for reaching out to Vireon AI. What kind of business do you run?",
+      "timestamp": "2026-05-25T18:49:06.457Z"
+    },
+    {
+      "id": "m_demo_919666555444_2",
+      "conversationId": "cv_demo_919666555444",
+      "from": "customer",
+      "content": "Just browsing",
+      "timestamp": "2026-05-25T18:52:06.457Z"
+    },
+    {
+      "id": "m_demo_919555444333_0",
+      "conversationId": "cv_demo_919555444333",
+      "from": "customer",
+      "content": "Hi I want to automate my business",
+      "timestamp": "2026-05-25T12:34:06.457Z"
+    },
+    {
+      "id": "m_demo_919555444333_1",
+      "conversationId": "cv_demo_919555444333",
+      "from": "bot",
+      "content": "Hey Deepika! 👋 Vireon AI here. What kind of business do you run?",
+      "timestamp": "2026-05-25T12:37:06.457Z"
+    },
+    {
+      "id": "m_demo_919555444333_2",
+      "conversationId": "cv_demo_919555444333",
+      "from": "customer",
+      "content": "I run a fitness studio chain, 4 locations",
+      "timestamp": "2026-05-25T12:40:06.457Z"
+    },
+    {
+      "id": "m_demo_919555444333_3",
+      "conversationId": "cv_demo_919555444333",
+      "from": "bot",
+      "content": "Amazing! What's your biggest challenge with getting new clients?",
+      "timestamp": "2026-05-25T12:43:06.457Z"
+    },
+    {
+      "id": "m_demo_919555444333_4",
+      "conversationId": "cv_demo_919555444333",
+      "from": "customer",
+      "content": "New members sign up but then don't follow through. Need automation badly",
+      "timestamp": "2026-05-25T12:46:06.457Z"
+    },
+    {
+      "id": "m_demo_919555444333_5",
+      "conversationId": "cv_demo_919555444333",
+      "from": "bot",
+      "content": "We can fix that! Our AI follows up with every lead automatically. Want to see a demo? Here's the link: https://calendly.com/vireon-ai",
+      "timestamp": "2026-05-25T12:49:06.457Z"
+    },
+    {
+      "id": "m_demo_919555444333_6",
+      "conversationId": "cv_demo_919555444333",
+      "from": "customer",
+      "content": "Booked for Thursday!",
+      "timestamp": "2026-05-25T12:52:06.457Z"
+    },
+    {
+      "id": "m_demo_919444333222_0",
+      "conversationId": "cv_demo_919444333222",
+      "from": "customer",
+      "content": "Hello",
+      "timestamp": "2026-05-25T08:40:06.457Z"
+    },
+    {
+      "id": "m_demo_919444333222_1",
+      "conversationId": "cv_demo_919444333222",
+      "from": "bot",
+      "content": "Hey Rohit! 👋 Thanks for reaching out. What kind of business do you run?",
+      "timestamp": "2026-05-25T08:43:06.457Z"
+    },
+    {
+      "id": "m_demo_919444333222_2",
+      "conversationId": "cv_demo_919444333222",
+      "from": "customer",
+      "content": "IT consulting, 10 member team",
+      "timestamp": "2026-05-25T08:46:06.457Z"
+    },
+    {
+      "id": "m_demo_919444333222_3",
+      "conversationId": "cv_demo_919444333222",
+      "from": "bot",
+      "content": "Nice! What's your biggest pain point with client acquisition?",
+      "timestamp": "2026-05-25T08:49:06.457Z"
+    },
+    {
+      "id": "m_demo_919444333222_4",
+      "conversationId": "cv_demo_919444333222",
+      "from": "customer",
+      "content": "Cold outreach is killing us, very low conversion",
+      "timestamp": "2026-05-25T08:52:06.457Z"
+    },
+    {
+      "id": "m_demo_919333222111_0",
+      "conversationId": "cv_demo_919333222111",
+      "from": "customer",
+      "content": "I need an AI agent for my solar business",
+      "timestamp": "2026-05-26T00:34:06.457Z"
+    },
+    {
+      "id": "m_demo_919333222111_1",
+      "conversationId": "cv_demo_919333222111",
+      "from": "bot",
+      "content": "Hey Ananya! 👋 Perfect timing. What scale are you at currently?",
+      "timestamp": "2026-05-26T00:37:06.457Z"
+    },
+    {
+      "id": "m_demo_919333222111_2",
+      "conversationId": "cv_demo_919333222111",
+      "from": "customer",
+      "content": "We do about 50 installations per month, want to scale to 150",
+      "timestamp": "2026-05-26T00:40:06.457Z"
+    },
+    {
+      "id": "m_demo_919333222111_3",
+      "conversationId": "cv_demo_919333222111",
+      "from": "bot",
+      "content": "That's ambitious! Are you running ads currently?",
+      "timestamp": "2026-05-26T00:43:06.457Z"
+    },
+    {
+      "id": "m_demo_919333222111_4",
+      "conversationId": "cv_demo_919333222111",
+      "from": "customer",
+      "content": "Yes Meta and YouTube, spending 2L per month",
+      "timestamp": "2026-05-26T00:46:06.457Z"
+    },
+    {
+      "id": "m_demo_919333222111_5",
+      "conversationId": "cv_demo_919333222111",
+      "from": "bot",
+      "content": "With that ad spend you need AI follow-up urgently or you're leaving money on the table. Shall we get on a call? https://calendly.com/vireon-ai",
+      "timestamp": "2026-05-26T00:49:06.457Z"
+    },
+    {
+      "id": "m_demo_919333222111_6",
+      "conversationId": "cv_demo_919333222111",
+      "from": "customer",
+      "content": "Sending me the link to book",
+      "timestamp": "2026-05-26T00:52:06.457Z"
+    },
+    {
+      "id": "m_1779785725264_p2pn6ldzzta",
+      "conversationId": "cv_demo_919811223344",
+      "from": "human",
+      "content": "nice",
+      "timestamp": "2026-05-26T08:55:25.264Z",
+      "waMessageId": "mock_msg_1779785725250"
+    }
+  ]
+}
