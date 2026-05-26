@@ -1,0 +1,15 @@
+{
+  "framework": "nextjs",
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+  "env": {
+    "WHATSAPP_PHONE_NUMBER_ID": "@whatsapp_phone_number_id",
+    "WHATSAPP_ACCESS_TOKEN": "@whatsapp_access_token",
+    "WHATSAPP_VERIFY_TOKEN": "@whatsapp_verify_token",
+    "GROQ_API_KEY": "@groq_api_key",
+    "GOOGLE_SERVICE_ACCOUNT_JSON": "@google_service_account_json",
+    "GOOGLE_CALENDAR_ID": "@google_calendar_id",
+    "UPSTASH_REDIS_REST_URL": "@upstash_redis_rest_url",
+    "UPSTASH_REDIS_REST_TOKEN": "@upstash_redis_rest_token"
+  }
+}

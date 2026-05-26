@@ -10,11 +10,10 @@
         "name": "Priya Sharma",
         "concern": "Severe back pain",
         "phone": "919876543210",
-        "preferredDatetime": "Tomorrow 11am",
         "confirmedDatetime": "Wednesday, 28 May at 11:00 AM"
       },
-      "createdAt": "2026-05-25T09:47:34.017Z",
-      "lastContactAt": "2026-05-26T07:47:34.017Z"
+      "createdAt": "2026-05-25T09:55:09.771Z",
+      "lastContactAt": "2026-05-26T07:55:09.771Z"
     },
     {
       "id": "c_demo_919811223344",
@@ -25,11 +24,11 @@
       "appointmentData": {
         "name": "Rahul Verma",
         "concern": "Fever and cough for 4 days",
-        "phone": "919811223344",
+        "phone": "9811223344",
         "confirmedDatetime": "Thursday, 29 May at 2:00 PM"
       },
-      "createdAt": "2026-05-24T09:47:34.017Z",
-      "lastContactAt": "2026-05-26T05:47:34.017Z"
+      "createdAt": "2026-05-24T09:55:09.771Z",
+      "lastContactAt": "2026-05-26T05:55:09.771Z"
     },
     {
       "id": "c_demo_919988776655",
@@ -41,8 +40,8 @@
         "name": "Anita Desai",
         "concern": "Knee pain and swelling"
       },
-      "createdAt": "2026-05-26T09:47:34.017Z",
-      "lastContactAt": "2026-05-26T09:47:34.017Z"
+      "createdAt": "2026-05-26T09:55:09.771Z",
+      "lastContactAt": "2026-05-26T09:55:09.771Z"
     },
     {
       "id": "c_demo_919777888999",
@@ -55,8 +54,8 @@
         "concern": "Diabetes checkup",
         "phone": "919777888999"
       },
-      "createdAt": "2026-05-25T09:47:34.018Z",
-      "lastContactAt": "2026-05-26T07:47:34.018Z"
+      "createdAt": "2026-05-25T09:55:09.771Z",
+      "lastContactAt": "2026-05-26T07:55:09.771Z"
     },
     {
       "id": "c_demo_919666555444",
@@ -65,8 +64,8 @@
       "status": "not_interested",
       "stage": "declined",
       "appointmentData": {},
-      "createdAt": "2026-05-23T09:47:34.018Z",
-      "lastContactAt": "2026-05-26T03:47:34.018Z"
+      "createdAt": "2026-05-23T09:55:09.771Z",
+      "lastContactAt": "2026-05-26T03:55:09.771Z"
     },
     {
       "id": "c_demo_919555444333",
@@ -77,11 +76,11 @@
       "appointmentData": {
         "name": "Kiran Mehta",
         "concern": "Skin allergy and rash",
-        "phone": "919555444333",
+        "phone": "9555444333",
         "confirmedDatetime": "Friday, 30 May at 10:00 AM"
       },
-      "createdAt": "2026-05-21T09:47:34.018Z",
-      "lastContactAt": "2026-05-25T23:47:34.018Z"
+      "createdAt": "2026-05-21T09:55:09.771Z",
+      "lastContactAt": "2026-05-25T23:55:09.771Z"
     },
     {
       "id": "c_demo_919444333222",
@@ -92,8 +91,8 @@
       "appointmentData": {
         "name": "Deepak Nair"
       },
-      "createdAt": "2026-05-26T09:47:34.018Z",
-      "lastContactAt": "2026-05-26T09:47:34.018Z"
+      "createdAt": "2026-05-26T09:55:09.771Z",
+      "lastContactAt": "2026-05-26T09:55:09.771Z"
     },
     {
       "id": "c_demo_919333222111",
@@ -102,8 +101,8 @@
       "status": "new",
       "stage": "greeting",
       "appointmentData": {},
-      "createdAt": "2026-05-26T09:47:34.018Z",
-      "lastContactAt": "2026-05-26T09:47:34.018Z"
+      "createdAt": "2026-05-26T09:55:09.771Z",
+      "lastContactAt": "2026-05-26T09:55:09.771Z"
     }
   ],
   "conversations": [
@@ -118,13 +117,12 @@
         "name": "Priya Sharma",
         "concern": "Severe back pain",
         "phone": "919876543210",
-        "preferredDatetime": "Tomorrow 11am",
         "confirmedDatetime": "Wednesday, 28 May at 11:00 AM"
       },
       "messageCount": 12,
-      "lastMessageAt": "2026-05-26T07:47:34.017Z",
+      "lastMessageAt": "2026-05-26T07:55:09.771Z",
       "lastMessage": "✅ *Appointment Confirmed!*\n\n👤 *Patient:* Priya Sharma\n🩺 *Concern:* Severe back",
-      "createdAt": "2026-05-25T09:47:34.017Z",
+      "createdAt": "2026-05-25T09:55:09.771Z",
       "isRead": true
     },
     {
@@ -137,13 +135,13 @@
       "appointmentData": {
         "name": "Rahul Verma",
         "concern": "Fever and cough for 4 days",
-        "phone": "919811223344",
+        "phone": "9811223344",
         "confirmedDatetime": "Thursday, 29 May at 2:00 PM"
       },
       "messageCount": 12,
-      "lastMessageAt": "2026-05-26T05:47:34.017Z",
+      "lastMessageAt": "2026-05-26T05:55:09.771Z",
       "lastMessage": "✅ *Appointment Confirmed!*\n\n👤 *Patient:* Rahul Verma\n🩺 *Concern:* Fever and co",
-      "createdAt": "2026-05-24T09:47:34.017Z",
+      "createdAt": "2026-05-24T09:55:09.771Z",
       "isRead": true
     },
     {
@@ -158,9 +156,9 @@
         "concern": "Knee pain and swelling"
       },
       "messageCount": 8,
-      "lastMessageAt": "2026-05-26T09:47:34.017Z",
+      "lastMessageAt": "2026-05-26T09:55:09.771Z",
       "lastMessage": "Understood. What's the best phone number to reach you at?",
-      "createdAt": "2026-05-26T09:47:34.017Z",
+      "createdAt": "2026-05-26T09:55:09.771Z",
       "isRead": false
     },
     {
@@ -176,10 +174,10 @@
         "phone": "919777888999"
       },
       "messageCount": 10,
-      "lastMessageAt": "2026-05-26T07:47:34.018Z",
-      "lastMessage": "What date and time works for you? Mon–Sat, 9am–7pm.",
-      "createdAt": "2026-05-25T09:47:34.018Z",
-      "isRead": true
+      "lastMessageAt": "2026-05-26T07:55:09.771Z",
+      "lastMessage": "What date and time works? Mon–Sat, 9am–7pm.",
+      "createdAt": "2026-05-25T09:55:09.771Z",
+      "isRead": false
     },
     {
       "id": "cv_demo_919666555444",
@@ -190,9 +188,9 @@
       "stage": "declined",
       "appointmentData": {},
       "messageCount": 4,
-      "lastMessageAt": "2026-05-26T03:47:34.018Z",
-      "lastMessage": "We're open Mon–Sat from 9am to 7pm. Feel free to reach out whenever you need us!",
-      "createdAt": "2026-05-23T09:47:34.018Z",
+      "lastMessageAt": "2026-05-26T03:55:09.771Z",
+      "lastMessage": "We're open Mon–Sat from 9am to 7pm. Feel free to reach out anytime! Take care 🙏",
+      "createdAt": "2026-05-23T09:55:09.771Z",
       "isRead": true
     },
     {
@@ -205,13 +203,13 @@
       "appointmentData": {
         "name": "Kiran Mehta",
         "concern": "Skin allergy and rash",
-        "phone": "919555444333",
+        "phone": "9555444333",
         "confirmedDatetime": "Friday, 30 May at 10:00 AM"
       },
       "messageCount": 12,
-      "lastMessageAt": "2026-05-25T23:47:34.018Z",
+      "lastMessageAt": "2026-05-25T23:55:09.771Z",
       "lastMessage": "✅ *Appointment Confirmed!*\n\n👤 *Patient:* Kiran Mehta\n🩺 *Concern:* Skin allergy",
-      "createdAt": "2026-05-21T09:47:34.018Z",
+      "createdAt": "2026-05-21T09:55:09.771Z",
       "isRead": true
     },
     {
@@ -225,10 +223,10 @@
         "name": "Deepak Nair"
       },
       "messageCount": 6,
-      "lastMessageAt": "2026-05-26T09:47:34.018Z",
-      "lastMessage": "Thanks, Deepak! What is your concern or reason for the appointment?",
-      "createdAt": "2026-05-26T09:47:34.018Z",
-      "isRead": true
+      "lastMessageAt": "2026-05-26T09:55:09.771Z",
+      "lastMessage": "Thanks Deepak! What is your concern or reason for the appointment?",
+      "createdAt": "2026-05-26T09:55:09.771Z",
+      "isRead": false
     },
     {
       "id": "cv_demo_919333222111",
@@ -239,9 +237,9 @@
       "stage": "greeting",
       "appointmentData": {},
       "messageCount": 2,
-      "lastMessageAt": "2026-05-26T09:47:34.018Z",
+      "lastMessageAt": "2026-05-26T09:55:09.771Z",
       "lastMessage": "Hello! 👋 Welcome to our clinic. Are you looking to book an appointment?",
-      "createdAt": "2026-05-26T09:47:34.018Z",
+      "createdAt": "2026-05-26T09:55:09.771Z",
       "isRead": true
     }
   ],
@@ -251,462 +249,462 @@
       "conversationId": "cv_demo_919876543210",
       "from": "customer",
       "content": "Hi",
-      "timestamp": "2026-05-26T06:59:34.017Z"
+      "timestamp": "2026-05-26T07:07:09.771Z"
     },
     {
       "id": "m_demo_919876543210_1",
       "conversationId": "cv_demo_919876543210",
       "from": "bot",
       "content": "Hello! 👋 Welcome to our clinic. Are you looking to book an appointment?",
-      "timestamp": "2026-05-26T07:03:34.017Z"
+      "timestamp": "2026-05-26T07:11:09.771Z"
     },
     {
       "id": "m_demo_919876543210_2",
       "conversationId": "cv_demo_919876543210",
       "from": "customer",
       "content": "Yes",
-      "timestamp": "2026-05-26T07:07:34.017Z"
+      "timestamp": "2026-05-26T07:15:09.771Z"
     },
     {
       "id": "m_demo_919876543210_3",
       "conversationId": "cv_demo_919876543210",
       "from": "bot",
-      "content": "Great! Happy to help. Could you please share your full name?",
-      "timestamp": "2026-05-26T07:11:34.017Z"
+      "content": "Great! Could you please share your full name?",
+      "timestamp": "2026-05-26T07:19:09.771Z"
     },
     {
       "id": "m_demo_919876543210_4",
       "conversationId": "cv_demo_919876543210",
       "from": "customer",
       "content": "Priya Sharma",
-      "timestamp": "2026-05-26T07:15:34.017Z"
+      "timestamp": "2026-05-26T07:23:09.771Z"
     },
     {
       "id": "m_demo_919876543210_5",
       "conversationId": "cv_demo_919876543210",
       "from": "bot",
-      "content": "Thanks, Priya Sharma! What is your concern or reason for the appointment?",
-      "timestamp": "2026-05-26T07:19:34.017Z"
+      "content": "Thanks Priya! What is your concern or reason for the appointment?",
+      "timestamp": "2026-05-26T07:27:09.771Z"
     },
     {
       "id": "m_demo_919876543210_6",
       "conversationId": "cv_demo_919876543210",
       "from": "customer",
       "content": "I have severe back pain for the last 3 days",
-      "timestamp": "2026-05-26T07:23:34.017Z"
+      "timestamp": "2026-05-26T07:31:09.771Z"
     },
     {
       "id": "m_demo_919876543210_7",
       "conversationId": "cv_demo_919876543210",
       "from": "bot",
       "content": "Understood. What's the best phone number to reach you at?",
-      "timestamp": "2026-05-26T07:27:34.017Z"
+      "timestamp": "2026-05-26T07:35:09.771Z"
     },
     {
       "id": "m_demo_919876543210_8",
       "conversationId": "cv_demo_919876543210",
       "from": "customer",
       "content": "919876543210",
-      "timestamp": "2026-05-26T07:31:34.017Z"
+      "timestamp": "2026-05-26T07:39:09.771Z"
     },
     {
       "id": "m_demo_919876543210_9",
       "conversationId": "cv_demo_919876543210",
       "from": "bot",
-      "content": "Thank you! What date and time would you prefer? We're open Mon–Sat, 9am–7pm.",
-      "timestamp": "2026-05-26T07:35:34.017Z"
+      "content": "What date and time would you prefer? We're open Mon–Sat, 9am–7pm.",
+      "timestamp": "2026-05-26T07:43:09.771Z"
     },
     {
       "id": "m_demo_919876543210_10",
       "conversationId": "cv_demo_919876543210",
       "from": "customer",
       "content": "Tomorrow 11am",
-      "timestamp": "2026-05-26T07:39:34.017Z"
+      "timestamp": "2026-05-26T07:47:09.771Z"
     },
     {
       "id": "m_demo_919876543210_11",
       "conversationId": "cv_demo_919876543210",
       "from": "bot",
       "content": "✅ *Appointment Confirmed!*\n\n👤 *Patient:* Priya Sharma\n🩺 *Concern:* Severe back pain\n📅 *Date & Time:* Wednesday, 28 May at 11:00 AM\n📞 *Phone:* 919876543210\n\nPlease arrive 5 minutes early. See you soon! 🏥",
-      "timestamp": "2026-05-26T07:43:34.017Z"
+      "timestamp": "2026-05-26T07:51:09.771Z"
     },
     {
       "id": "m_demo_919811223344_0",
       "conversationId": "cv_demo_919811223344",
       "from": "customer",
       "content": "Hello, I need to see a doctor",
-      "timestamp": "2026-05-26T04:59:34.017Z"
+      "timestamp": "2026-05-26T05:07:09.771Z"
     },
     {
       "id": "m_demo_919811223344_1",
       "conversationId": "cv_demo_919811223344",
       "from": "bot",
-      "content": "Hello! 👋 Welcome to our clinic. Are you looking to book an appointment?",
-      "timestamp": "2026-05-26T05:03:34.017Z"
+      "content": "Hello! 👋 Are you looking to book an appointment?",
+      "timestamp": "2026-05-26T05:11:09.771Z"
     },
     {
       "id": "m_demo_919811223344_2",
       "conversationId": "cv_demo_919811223344",
       "from": "customer",
       "content": "Yes please",
-      "timestamp": "2026-05-26T05:07:34.017Z"
+      "timestamp": "2026-05-26T05:15:09.771Z"
     },
     {
       "id": "m_demo_919811223344_3",
       "conversationId": "cv_demo_919811223344",
       "from": "bot",
-      "content": "Great! Could you please share your full name?",
-      "timestamp": "2026-05-26T05:11:34.017Z"
+      "content": "Great! Could you share your full name?",
+      "timestamp": "2026-05-26T05:19:09.771Z"
     },
     {
       "id": "m_demo_919811223344_4",
       "conversationId": "cv_demo_919811223344",
       "from": "customer",
       "content": "Rahul Verma",
-      "timestamp": "2026-05-26T05:15:34.017Z"
+      "timestamp": "2026-05-26T05:23:09.771Z"
     },
     {
       "id": "m_demo_919811223344_5",
       "conversationId": "cv_demo_919811223344",
       "from": "bot",
-      "content": "Thanks, Rahul! What is your concern or reason for the appointment?",
-      "timestamp": "2026-05-26T05:19:34.017Z"
+      "content": "Thanks Rahul! What is your concern?",
+      "timestamp": "2026-05-26T05:27:09.771Z"
     },
     {
       "id": "m_demo_919811223344_6",
       "conversationId": "cv_demo_919811223344",
       "from": "customer",
       "content": "Fever and cough for 4 days",
-      "timestamp": "2026-05-26T05:23:34.017Z"
+      "timestamp": "2026-05-26T05:31:09.771Z"
     },
     {
       "id": "m_demo_919811223344_7",
       "conversationId": "cv_demo_919811223344",
       "from": "bot",
-      "content": "Understood. What's the best phone number to reach you at?",
-      "timestamp": "2026-05-26T05:27:34.017Z"
+      "content": "Noted. What's your contact number?",
+      "timestamp": "2026-05-26T05:35:09.771Z"
     },
     {
       "id": "m_demo_919811223344_8",
       "conversationId": "cv_demo_919811223344",
       "from": "customer",
       "content": "9811223344",
-      "timestamp": "2026-05-26T05:31:34.017Z"
+      "timestamp": "2026-05-26T05:39:09.771Z"
     },
     {
       "id": "m_demo_919811223344_9",
       "conversationId": "cv_demo_919811223344",
       "from": "bot",
-      "content": "What date and time would you prefer? We're open Mon–Sat, 9am–7pm.",
-      "timestamp": "2026-05-26T05:35:34.017Z"
+      "content": "What date and time works? Mon–Sat, 9am–7pm.",
+      "timestamp": "2026-05-26T05:43:09.771Z"
     },
     {
       "id": "m_demo_919811223344_10",
       "conversationId": "cv_demo_919811223344",
       "from": "customer",
       "content": "Thursday 2pm",
-      "timestamp": "2026-05-26T05:39:34.017Z"
+      "timestamp": "2026-05-26T05:47:09.771Z"
     },
     {
       "id": "m_demo_919811223344_11",
       "conversationId": "cv_demo_919811223344",
       "from": "bot",
-      "content": "✅ *Appointment Confirmed!*\n\n👤 *Patient:* Rahul Verma\n🩺 *Concern:* Fever and cough\n📅 *Date & Time:* Thursday, 29 May at 2:00 PM\n📞 *Phone:* 9811223344\n\nPlease arrive 5 minutes early. See you soon! 🏥",
-      "timestamp": "2026-05-26T05:43:34.017Z"
+      "content": "✅ *Appointment Confirmed!*\n\n👤 *Patient:* Rahul Verma\n🩺 *Concern:* Fever and cough\n📅 *Date & Time:* Thursday, 29 May at 2:00 PM\n\nSee you soon! 🏥",
+      "timestamp": "2026-05-26T05:51:09.771Z"
     },
     {
       "id": "m_demo_919988776655_0",
       "conversationId": "cv_demo_919988776655",
       "from": "customer",
       "content": "I want to book appointment",
-      "timestamp": "2026-05-26T09:15:34.017Z"
+      "timestamp": "2026-05-26T09:23:09.771Z"
     },
     {
       "id": "m_demo_919988776655_1",
       "conversationId": "cv_demo_919988776655",
       "from": "bot",
-      "content": "Hello! 👋 Welcome to our clinic. Are you looking to book an appointment?",
-      "timestamp": "2026-05-26T09:19:34.017Z"
+      "content": "Hello! 👋 Are you looking to book an appointment?",
+      "timestamp": "2026-05-26T09:27:09.771Z"
     },
     {
       "id": "m_demo_919988776655_2",
       "conversationId": "cv_demo_919988776655",
       "from": "customer",
       "content": "Yes",
-      "timestamp": "2026-05-26T09:23:34.017Z"
+      "timestamp": "2026-05-26T09:31:09.771Z"
     },
     {
       "id": "m_demo_919988776655_3",
       "conversationId": "cv_demo_919988776655",
       "from": "bot",
-      "content": "Great! Could you please share your full name?",
-      "timestamp": "2026-05-26T09:27:34.017Z"
+      "content": "Could you share your full name?",
+      "timestamp": "2026-05-26T09:35:09.771Z"
     },
     {
       "id": "m_demo_919988776655_4",
       "conversationId": "cv_demo_919988776655",
       "from": "customer",
       "content": "Anita Desai",
-      "timestamp": "2026-05-26T09:31:34.017Z"
+      "timestamp": "2026-05-26T09:39:09.771Z"
     },
     {
       "id": "m_demo_919988776655_5",
       "conversationId": "cv_demo_919988776655",
       "from": "bot",
-      "content": "Thanks, Anita! What is your concern or reason for the appointment?",
-      "timestamp": "2026-05-26T09:35:34.017Z"
+      "content": "Thanks Anita! What is your concern?",
+      "timestamp": "2026-05-26T09:43:09.771Z"
     },
     {
       "id": "m_demo_919988776655_6",
       "conversationId": "cv_demo_919988776655",
       "from": "customer",
       "content": "Knee pain and swelling since last week",
-      "timestamp": "2026-05-26T09:39:34.017Z"
+      "timestamp": "2026-05-26T09:47:09.771Z"
     },
     {
       "id": "m_demo_919988776655_7",
       "conversationId": "cv_demo_919988776655",
       "from": "bot",
       "content": "Understood. What's the best phone number to reach you at?",
-      "timestamp": "2026-05-26T09:43:34.017Z"
+      "timestamp": "2026-05-26T09:51:09.771Z"
     },
     {
       "id": "m_demo_919777888999_0",
       "conversationId": "cv_demo_919777888999",
       "from": "customer",
       "content": "Hi need appointment",
-      "timestamp": "2026-05-26T07:07:34.018Z"
+      "timestamp": "2026-05-26T07:15:09.771Z"
     },
     {
       "id": "m_demo_919777888999_1",
       "conversationId": "cv_demo_919777888999",
       "from": "bot",
-      "content": "Hello! 👋 Are you looking to book an appointment with our clinic?",
-      "timestamp": "2026-05-26T07:11:34.018Z"
+      "content": "Hello! 👋 Are you looking to book an appointment?",
+      "timestamp": "2026-05-26T07:19:09.771Z"
     },
     {
       "id": "m_demo_919777888999_2",
       "conversationId": "cv_demo_919777888999",
       "from": "customer",
       "content": "Yes",
-      "timestamp": "2026-05-26T07:15:34.018Z"
+      "timestamp": "2026-05-26T07:23:09.771Z"
     },
     {
       "id": "m_demo_919777888999_3",
       "conversationId": "cv_demo_919777888999",
       "from": "bot",
-      "content": "Great! Could you share your full name?",
-      "timestamp": "2026-05-26T07:19:34.018Z"
+      "content": "Could you share your name?",
+      "timestamp": "2026-05-26T07:27:09.771Z"
     },
     {
       "id": "m_demo_919777888999_4",
       "conversationId": "cv_demo_919777888999",
       "from": "customer",
       "content": "Suresh Patel",
-      "timestamp": "2026-05-26T07:23:34.018Z"
+      "timestamp": "2026-05-26T07:31:09.771Z"
     },
     {
       "id": "m_demo_919777888999_5",
       "conversationId": "cv_demo_919777888999",
       "from": "bot",
-      "content": "Thanks Suresh! What is your concern?",
-      "timestamp": "2026-05-26T07:27:34.018Z"
+      "content": "What is your concern?",
+      "timestamp": "2026-05-26T07:35:09.771Z"
     },
     {
       "id": "m_demo_919777888999_6",
       "conversationId": "cv_demo_919777888999",
       "from": "customer",
       "content": "Diabetes checkup and blood sugar monitoring",
-      "timestamp": "2026-05-26T07:31:34.018Z"
+      "timestamp": "2026-05-26T07:39:09.771Z"
     },
     {
       "id": "m_demo_919777888999_7",
       "conversationId": "cv_demo_919777888999",
       "from": "bot",
       "content": "Noted. What's your phone number?",
-      "timestamp": "2026-05-26T07:35:34.018Z"
+      "timestamp": "2026-05-26T07:43:09.771Z"
     },
     {
       "id": "m_demo_919777888999_8",
       "conversationId": "cv_demo_919777888999",
       "from": "customer",
       "content": "9777888999",
-      "timestamp": "2026-05-26T07:39:34.018Z"
+      "timestamp": "2026-05-26T07:47:09.771Z"
     },
     {
       "id": "m_demo_919777888999_9",
       "conversationId": "cv_demo_919777888999",
       "from": "bot",
-      "content": "What date and time works for you? Mon–Sat, 9am–7pm.",
-      "timestamp": "2026-05-26T07:43:34.018Z"
+      "content": "What date and time works? Mon–Sat, 9am–7pm.",
+      "timestamp": "2026-05-26T07:51:09.771Z"
     },
     {
       "id": "m_demo_919666555444_0",
       "conversationId": "cv_demo_919666555444",
       "from": "customer",
       "content": "Hello",
-      "timestamp": "2026-05-26T03:31:34.018Z"
+      "timestamp": "2026-05-26T03:39:09.771Z"
     },
     {
       "id": "m_demo_919666555444_1",
       "conversationId": "cv_demo_919666555444",
       "from": "bot",
-      "content": "Hello! 👋 Welcome to our clinic. Are you looking to book an appointment?",
-      "timestamp": "2026-05-26T03:35:34.018Z"
+      "content": "Hello! 👋 Are you looking to book an appointment?",
+      "timestamp": "2026-05-26T03:43:09.771Z"
     },
     {
       "id": "m_demo_919666555444_2",
       "conversationId": "cv_demo_919666555444",
       "from": "customer",
       "content": "No, just had a question about timing",
-      "timestamp": "2026-05-26T03:39:34.018Z"
+      "timestamp": "2026-05-26T03:47:09.771Z"
     },
     {
       "id": "m_demo_919666555444_3",
       "conversationId": "cv_demo_919666555444",
       "from": "bot",
-      "content": "We're open Mon–Sat from 9am to 7pm. Feel free to reach out whenever you need us! Take care 🙏",
-      "timestamp": "2026-05-26T03:43:34.018Z"
+      "content": "We're open Mon–Sat from 9am to 7pm. Feel free to reach out anytime! Take care 🙏",
+      "timestamp": "2026-05-26T03:51:09.771Z"
     },
     {
       "id": "m_demo_919555444333_0",
       "conversationId": "cv_demo_919555444333",
       "from": "customer",
       "content": "I need to see dermatologist",
-      "timestamp": "2026-05-25T22:59:34.018Z"
+      "timestamp": "2026-05-25T23:07:09.771Z"
     },
     {
       "id": "m_demo_919555444333_1",
       "conversationId": "cv_demo_919555444333",
       "from": "bot",
-      "content": "Hello! 👋 Are you looking to book an appointment with our clinic?",
-      "timestamp": "2026-05-25T23:03:34.018Z"
+      "content": "Hello! 👋 Are you looking to book an appointment?",
+      "timestamp": "2026-05-25T23:11:09.771Z"
     },
     {
       "id": "m_demo_919555444333_2",
       "conversationId": "cv_demo_919555444333",
       "from": "customer",
       "content": "Yes urgently",
-      "timestamp": "2026-05-25T23:07:34.018Z"
+      "timestamp": "2026-05-25T23:15:09.771Z"
     },
     {
       "id": "m_demo_919555444333_3",
       "conversationId": "cv_demo_919555444333",
       "from": "bot",
-      "content": "Of course! Could you share your full name?",
-      "timestamp": "2026-05-25T23:11:34.018Z"
+      "content": "Could you share your full name?",
+      "timestamp": "2026-05-25T23:19:09.771Z"
     },
     {
       "id": "m_demo_919555444333_4",
       "conversationId": "cv_demo_919555444333",
       "from": "customer",
       "content": "Kiran Mehta",
-      "timestamp": "2026-05-25T23:15:34.018Z"
+      "timestamp": "2026-05-25T23:23:09.771Z"
     },
     {
       "id": "m_demo_919555444333_5",
       "conversationId": "cv_demo_919555444333",
       "from": "bot",
-      "content": "Thanks Kiran! What is your concern?",
-      "timestamp": "2026-05-25T23:19:34.018Z"
+      "content": "What is your concern?",
+      "timestamp": "2026-05-25T23:27:09.771Z"
     },
     {
       "id": "m_demo_919555444333_6",
       "conversationId": "cv_demo_919555444333",
       "from": "customer",
       "content": "Skin allergy and rash, getting worse",
-      "timestamp": "2026-05-25T23:23:34.018Z"
+      "timestamp": "2026-05-25T23:31:09.771Z"
     },
     {
       "id": "m_demo_919555444333_7",
       "conversationId": "cv_demo_919555444333",
       "from": "bot",
-      "content": "Understood. What's your contact number?",
-      "timestamp": "2026-05-25T23:27:34.018Z"
+      "content": "What's your contact number?",
+      "timestamp": "2026-05-25T23:35:09.771Z"
     },
     {
       "id": "m_demo_919555444333_8",
       "conversationId": "cv_demo_919555444333",
       "from": "customer",
       "content": "9555444333",
-      "timestamp": "2026-05-25T23:31:34.018Z"
+      "timestamp": "2026-05-25T23:39:09.771Z"
     },
     {
       "id": "m_demo_919555444333_9",
       "conversationId": "cv_demo_919555444333",
       "from": "bot",
-      "content": "What date and time works for you?",
-      "timestamp": "2026-05-25T23:35:34.018Z"
+      "content": "What date and time works?",
+      "timestamp": "2026-05-25T23:43:09.771Z"
     },
     {
       "id": "m_demo_919555444333_10",
       "conversationId": "cv_demo_919555444333",
       "from": "customer",
       "content": "Friday 10am",
-      "timestamp": "2026-05-25T23:39:34.018Z"
+      "timestamp": "2026-05-25T23:47:09.771Z"
     },
     {
       "id": "m_demo_919555444333_11",
       "conversationId": "cv_demo_919555444333",
       "from": "bot",
-      "content": "✅ *Appointment Confirmed!*\n\n👤 *Patient:* Kiran Mehta\n🩺 *Concern:* Skin allergy and rash\n📅 *Date & Time:* Friday, 30 May at 10:00 AM\n📞 *Phone:* 9555444333\n\nSee you soon! 🏥",
-      "timestamp": "2026-05-25T23:43:34.018Z"
+      "content": "✅ *Appointment Confirmed!*\n\n👤 *Patient:* Kiran Mehta\n🩺 *Concern:* Skin allergy\n📅 *Date & Time:* Friday, 30 May at 10:00 AM\n\nSee you soon! 🏥",
+      "timestamp": "2026-05-25T23:51:09.771Z"
     },
     {
       "id": "m_demo_919444333222_0",
       "conversationId": "cv_demo_919444333222",
       "from": "customer",
       "content": "Hi",
-      "timestamp": "2026-05-26T09:23:34.018Z"
+      "timestamp": "2026-05-26T09:31:09.771Z"
     },
     {
       "id": "m_demo_919444333222_1",
       "conversationId": "cv_demo_919444333222",
       "from": "bot",
-      "content": "Hello! 👋 Welcome to our clinic. Are you looking to book an appointment?",
-      "timestamp": "2026-05-26T09:27:34.018Z"
+      "content": "Hello! 👋 Are you looking to book an appointment?",
+      "timestamp": "2026-05-26T09:35:09.771Z"
     },
     {
       "id": "m_demo_919444333222_2",
       "conversationId": "cv_demo_919444333222",
       "from": "customer",
       "content": "Yes",
-      "timestamp": "2026-05-26T09:31:34.018Z"
+      "timestamp": "2026-05-26T09:39:09.771Z"
     },
     {
       "id": "m_demo_919444333222_3",
       "conversationId": "cv_demo_919444333222",
       "from": "bot",
-      "content": "Great! Could you please share your full name?",
-      "timestamp": "2026-05-26T09:35:34.018Z"
+      "content": "Could you share your full name?",
+      "timestamp": "2026-05-26T09:43:09.771Z"
     },
     {
       "id": "m_demo_919444333222_4",
       "conversationId": "cv_demo_919444333222",
       "from": "customer",
       "content": "Deepak Nair",
-      "timestamp": "2026-05-26T09:39:34.018Z"
+      "timestamp": "2026-05-26T09:47:09.771Z"
     },
     {
       "id": "m_demo_919444333222_5",
       "conversationId": "cv_demo_919444333222",
       "from": "bot",
-      "content": "Thanks, Deepak! What is your concern or reason for the appointment?",
-      "timestamp": "2026-05-26T09:43:34.018Z"
+      "content": "Thanks Deepak! What is your concern or reason for the appointment?",
+      "timestamp": "2026-05-26T09:51:09.771Z"
     },
     {
       "id": "m_demo_919333222111_0",
       "conversationId": "cv_demo_919333222111",
       "from": "customer",
       "content": "Hello",
-      "timestamp": "2026-05-26T09:39:34.018Z"
+      "timestamp": "2026-05-26T09:47:09.771Z"
     },
     {
       "id": "m_demo_919333222111_1",
       "conversationId": "cv_demo_919333222111",
       "from": "bot",
       "content": "Hello! 👋 Welcome to our clinic. Are you looking to book an appointment?",
-      "timestamp": "2026-05-26T09:43:34.018Z"
+      "timestamp": "2026-05-26T09:51:09.771Z"
     }
   ]
 }

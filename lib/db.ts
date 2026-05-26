@@ -66,46 +66,91 @@ export interface DbSchema {
   messages: Message[];
 }
 
-const defaultData: DbSchema = {
-  contacts: [],
-  conversations: [],
-  messages: [],
-};
+const defaultData: DbSchema = { contacts: [], conversations: [], messages: [] };
 
+// ── Storage backend selection ──────────────────────────────────────────────
+// Uses Upstash Redis when env vars are present, falls back to lowdb (local JSON)
+
+async function getRedis() {
+  const url = process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  if (!url || !token) return null;
+  const { Redis } = await import("@upstash/redis");
+  return new Redis({ url, token });
+}
+
+// ── Lowdb fallback ─────────────────────────────────────────────────────────
 let dbInstance: Low<DbSchema> | null = null;
-
-export async function getDb(): Promise<Low<DbSchema>> {
+async function getLowDb(): Promise<Low<DbSchema>> {
   if (dbInstance) return dbInstance;
   const dbPath = path.join(process.cwd(), "data", "db.json");
   dbInstance = await JSONFilePreset<DbSchema>(dbPath, defaultData);
   return dbInstance;
 }
 
+// ── Public API ─────────────────────────────────────────────────────────────
+
+export async function getDb(): Promise<Low<DbSchema>> {
+  return getLowDb();
+}
+
+async function readAll(): Promise<DbSchema> {
+  const redis = await getRedis();
+  if (redis) {
+    const [contacts, conversations, messages] = await Promise.all([
+      redis.get<Contact[]>("contacts"),
+      redis.get<Conversation[]>("conversations"),
+      redis.get<Message[]>("messages"),
+    ]);
+    return {
+      contacts: contacts ?? [],
+      conversations: conversations ?? [],
+      messages: messages ?? [],
+    };
+  }
+  const db = await getLowDb();
+  await db.read();
+  return db.data;
+}
+
+async function writeAll(data: DbSchema): Promise<void> {
+  const redis = await getRedis();
+  if (redis) {
+    await Promise.all([
+      redis.set("contacts", data.contacts),
+      redis.set("conversations", data.conversations),
+      redis.set("messages", data.messages),
+    ]);
+    return;
+  }
+  const db = await getLowDb();
+  db.data = data;
+  await db.write();
+}
+
 export async function findOrCreateConversation(
   phone: string,
   name: string
 ): Promise<{ contact: Contact; conversation: Conversation }> {
-  const db = await getDb();
-  await db.read();
+  const data = await readAll();
 
-  let contact = db.data.contacts.find((c) => c.phone === phone);
+  let contact = data.contacts.find((c) => c.phone === phone);
   if (!contact) {
     contact = {
       id: `c_${Date.now()}_${Math.random().toString(36).slice(2)}`,
-      phone,
-      name,
+      phone, name,
       status: "new",
       stage: "greeting",
       appointmentData: {},
       createdAt: new Date().toISOString(),
       lastContactAt: new Date().toISOString(),
     };
-    db.data.contacts.push(contact);
+    data.contacts.push(contact);
   } else {
     contact.lastContactAt = new Date().toISOString();
   }
 
-  let conversation = db.data.conversations.find((cv) => cv.contactId === contact!.id);
+  let conversation = data.conversations.find((cv) => cv.contactId === contact!.id);
   if (!conversation) {
     conversation = {
       id: `cv_${Date.now()}_${Math.random().toString(36).slice(2)}`,
@@ -121,10 +166,10 @@ export async function findOrCreateConversation(
       createdAt: new Date().toISOString(),
       isRead: false,
     };
-    db.data.conversations.push(conversation);
+    data.conversations.push(conversation);
   }
 
-  await db.write();
+  await writeAll(data);
   return { contact, conversation };
 }
 
@@ -134,21 +179,17 @@ export async function addMessage(
   content: string,
   waMessageId?: string
 ): Promise<Message> {
-  const db = await getDb();
-  await db.read();
+  const data = await readAll();
 
   const message: Message = {
     id: `m_${Date.now()}_${Math.random().toString(36).slice(2)}`,
-    conversationId,
-    from,
-    content,
+    conversationId, from, content,
     timestamp: new Date().toISOString(),
     waMessageId,
   };
+  data.messages.push(message);
 
-  db.data.messages.push(message);
-
-  const conv = db.data.conversations.find((c) => c.id === conversationId);
+  const conv = data.conversations.find((c) => c.id === conversationId);
   if (conv) {
     conv.messageCount += 1;
     conv.lastMessageAt = message.timestamp;
@@ -156,7 +197,7 @@ export async function addMessage(
     if (from === "customer") conv.isRead = false;
   }
 
-  await db.write();
+  await writeAll(data);
   return message;
 }
 
@@ -164,13 +205,12 @@ export async function updateContact(
   contactId: string,
   updates: Partial<Pick<Contact, "status" | "stage" | "appointmentData" | "name">>
 ): Promise<void> {
-  const db = await getDb();
-  await db.read();
+  const data = await readAll();
 
-  const contact = db.data.contacts.find((c) => c.id === contactId);
+  const contact = data.contacts.find((c) => c.id === contactId);
   if (contact) Object.assign(contact, updates);
 
-  const conv = db.data.conversations.find((c) => c.contactId === contactId);
+  const conv = data.conversations.find((c) => c.contactId === contactId);
   if (conv) {
     if (updates.status) conv.status = updates.status;
     if (updates.stage) conv.stage = updates.stage;
@@ -181,5 +221,13 @@ export async function updateContact(
     }
   }
 
-  await db.write();
+  await writeAll(data);
+}
+
+export async function readData(): Promise<DbSchema> {
+  return readAll();
+}
+
+export async function writeData(data: DbSchema): Promise<void> {
+  return writeAll(data);
 }
