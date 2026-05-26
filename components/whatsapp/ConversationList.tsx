@@ -34,6 +34,8 @@ const statusLabel: Record<LeadStatus, string> = {
   not_interested: "Declined",
 };
 
+type FilterTab = "all" | "unread" | "progress" | "booked";
+
 interface Props {
   conversations: Conversation[];
   selectedId: string | null;
@@ -42,12 +44,29 @@ interface Props {
 
 export default function ConversationList({ conversations, selectedId, onSelect }: Props) {
   const [search, setSearch] = useState("");
+  const [tab, setTab] = useState<FilterTab>("all");
 
-  const filtered = conversations.filter(
-    (c) =>
+  const unreadCount = conversations.filter(c => !c.isRead).length;
+  const progressCount = conversations.filter(c => c.status === "warm" || c.status === "hot").length;
+  const bookedCount = conversations.filter(c => c.status === "booked").length;
+
+  const tabs: { id: FilterTab; label: string; count?: number }[] = [
+    { id: "all",      label: "All",        count: conversations.length },
+    { id: "unread",   label: "Unread",     count: unreadCount },
+    { id: "progress", label: "Active",     count: progressCount },
+    { id: "booked",   label: "Booked",     count: bookedCount },
+  ];
+
+  const filtered = conversations.filter(c => {
+    const matchesSearch =
       c.contactName.toLowerCase().includes(search.toLowerCase()) ||
-      c.contactPhone.includes(search)
-  );
+      c.contactPhone.includes(search);
+    if (!matchesSearch) return false;
+    if (tab === "unread")   return !c.isRead;
+    if (tab === "progress") return c.status === "warm" || c.status === "hot";
+    if (tab === "booked")   return c.status === "booked";
+    return true;
+  });
 
   return (
     <div
@@ -55,22 +74,48 @@ export default function ConversationList({ conversations, selectedId, onSelect }
       style={{ background: "var(--surface)", borderRight: "1px solid var(--border-light)" }}
     >
       {/* Header */}
-      <div className="px-4 py-4" style={{ borderBottom: "1px solid var(--border-light)" }}>
+      <div className="px-4 pt-4 pb-3" style={{ borderBottom: "1px solid var(--border-light)" }}>
         <h2 className="font-semibold text-sm mb-3" style={{ color: "var(--text-primary)" }}>Conversations</h2>
-        <div className="relative">
+
+        {/* Search */}
+        <div className="relative mb-3">
           <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5" style={{ color: "var(--text-tertiary)" }} />
           <input
             type="text"
-            placeholder="Search patients..."
+            placeholder="Search patients…"
             value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="w-full rounded-lg pl-8 pr-3 py-1.5 text-xs outline-none transition-all"
-            style={{
-              background: "var(--surface-2)",
-              border: "1px solid var(--border-light)",
-              color: "var(--text-primary)",
-            }}
+            onChange={e => setSearch(e.target.value)}
+            className="w-full rounded-lg pl-8 pr-3 py-1.5 text-xs outline-none"
+            style={{ background: "var(--surface-2)", border: "1px solid var(--border-light)", color: "var(--text-primary)" }}
           />
+        </div>
+
+        {/* Filter tabs */}
+        <div className="flex gap-1">
+          {tabs.map(t => (
+            <button
+              key={t.id}
+              onClick={() => setTab(t.id)}
+              className="flex items-center gap-1 px-2 py-1 rounded-md text-[11px] font-medium transition-all flex-1 justify-center"
+              style={{
+                background: tab === t.id ? "var(--blue)" : "var(--surface-2)",
+                color: tab === t.id ? "white" : "var(--text-tertiary)",
+              }}
+            >
+              {t.label}
+              {t.count !== undefined && t.count > 0 && (
+                <span
+                  className="rounded-full px-1 text-[9px] font-bold"
+                  style={{
+                    background: tab === t.id ? "rgba(255,255,255,0.3)" : "var(--border-light)",
+                    color: tab === t.id ? "white" : "var(--text-tertiary)",
+                  }}
+                >
+                  {t.count}
+                </span>
+              )}
+            </button>
+          ))}
         </div>
       </div>
 
@@ -130,7 +175,10 @@ export default function ConversationList({ conversations, selectedId, onSelect }
                 ) : (
                   <span
                     className="text-[9px] px-1.5 py-0.5 rounded-full shrink-0"
-                    style={{ background: selectedId === c.id ? "white" : "var(--surface-2)", color: statusDot[c.status] }}
+                    style={{
+                      background: selectedId === c.id ? "white" : "var(--surface-2)",
+                      color: statusDot[c.status],
+                    }}
                   >
                     {statusLabel[c.status]}
                   </span>
