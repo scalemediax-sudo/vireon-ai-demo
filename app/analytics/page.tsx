@@ -3,7 +3,6 @@
 import { useEffect, useState, useCallback } from "react";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
-  PieChart, Pie, Cell, Legend,
 } from "recharts";
 import { TrendingUp, MessageCircle, Zap, Target, RefreshCw, Clock } from "lucide-react";
 
@@ -14,7 +13,7 @@ interface AnalyticsData {
   avgMsgsToBook: number;
   avgResponseTime: number;
   botResponseRate: number;
-  messageSplit: { bot: number; human: number; customer: number };
+  stageDistribution: { stage: string; count: number }[];
   dayData: { day: string; conversations: number; booked: number }[];
 }
 
@@ -57,9 +56,12 @@ export default function AnalyticsPage() {
 
   if (!data) return null;
 
-  const { funnel, peakHours, topConcerns, avgMsgsToBook, avgResponseTime, botResponseRate, messageSplit, dayData } = data;
+  const { funnel, peakHours, topConcerns, avgMsgsToBook, avgResponseTime, botResponseRate, stageDistribution, dayData } = data;
   const conversionRate = funnel.total > 0 ? Math.round((funnel.booked / funnel.total) * 100) : 0;
-  const totalMessages = messageSplit.bot + messageSplit.human + messageSplit.customer;
+  const totalMessages = stageDistribution.reduce((s, d) => s + d.count, 0);
+
+  const maxStage = Math.max(...stageDistribution.map(s => s.count), 1);
+  const stageColors = ["#aeaeb2", "#0071e3", "#0071e3", "#ff9f0a", "#ff9f0a", "#30d158", "#ff3b30"];
 
   const funnelSteps = [
     { label: "Total Contacted", value: funnel.total, pct: 100, color: "#0071e3" },
@@ -67,12 +69,6 @@ export default function AnalyticsPage() {
     { label: "Provided All Details", value: funnel.detailsProvided, pct: funnel.total > 0 ? Math.round((funnel.detailsProvided / funnel.total) * 100) : 0, color: "#ff9f0a" },
     { label: "Appointment Booked", value: funnel.booked, pct: funnel.total > 0 ? Math.round((funnel.booked / funnel.total) * 100) : 0, color: "#30d158" },
   ];
-
-  const splitPie = [
-    { name: "AI Bot", value: messageSplit.bot, color: "#0071e3" },
-    { name: "Patient", value: messageSplit.customer, color: "#30d158" },
-    { name: "Staff", value: messageSplit.human, color: "#bf5af2" },
-  ].filter(d => d.value > 0);
 
   const barColors = ["#0071e3", "#30d158", "#ff9f0a", "#bf5af2", "#ff3b30", "#64d2ff"];
 
@@ -203,29 +199,27 @@ export default function AnalyticsPage() {
         </div>
 
         <div className="rounded-xl p-6" style={{ background: "var(--surface)", border: "1px solid var(--border-light)", boxShadow: "var(--shadow-sm)" }}>
-          <h2 className="text-sm font-semibold mb-2" style={{ color: "var(--text-primary)" }}>Message Breakdown</h2>
-          {splitPie.length === 0 ? (
-            <p className="text-sm mt-4" style={{ color: "var(--text-tertiary)" }}>No messages yet</p>
+          <h2 className="text-sm font-semibold mb-1" style={{ color: "var(--text-primary)" }}>Lead Pipeline</h2>
+          <p className="text-xs mb-4" style={{ color: "var(--text-tertiary)" }}>Current stage of all leads</p>
+          {stageDistribution.every(s => s.count === 0) ? (
+            <p className="text-sm" style={{ color: "var(--text-tertiary)" }}>No data — seed demo data first</p>
           ) : (
-            <>
-              <ResponsiveContainer width="100%" height={150}>
-                <PieChart>
-                  <Pie data={splitPie} cx="50%" cy="50%" innerRadius={42} outerRadius={65} paddingAngle={3} dataKey="value">
-                    {splitPie.map((entry, index) => <Cell key={index} fill={entry.color} />)}
-                  </Pie>
-                  <Tooltip content={<CustomTooltip />} />
-                </PieChart>
-              </ResponsiveContainer>
-              <div className="flex items-center justify-center gap-4 mt-1">
-                {splitPie.map(d => (
-                  <div key={d.name} className="flex items-center gap-1.5">
-                    <div className="w-2 h-2 rounded-full" style={{ background: d.color }} />
-                    <span className="text-xs" style={{ color: "var(--text-secondary)" }}>{d.name}</span>
-                    <span className="text-xs font-medium" style={{ color: "var(--text-primary)" }}>{d.value}</span>
+            <div className="space-y-2.5">
+              {stageDistribution.map(({ stage, count }, i) => (
+                <div key={stage}>
+                  <div className="flex items-center justify-between mb-1">
+                    <span className="text-xs font-medium" style={{ color: "var(--text-secondary)" }}>{stage}</span>
+                    <span className="text-xs font-semibold" style={{ color: "var(--text-primary)" }}>{count}</span>
                   </div>
-                ))}
-              </div>
-            </>
+                  <div className="h-2 rounded-full" style={{ background: "var(--surface-2)" }}>
+                    <div
+                      className="h-full rounded-full transition-all duration-500"
+                      style={{ width: `${(count / maxStage) * 100}%`, background: stageColors[i] ?? "#0071e3" }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
           )}
         </div>
       </div>

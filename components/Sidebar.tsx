@@ -4,12 +4,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard, MessageCircle, CalendarCheck,
-  BarChart2, Zap, Settings,
+  BarChart2, Zap, Settings, Users,
 } from "lucide-react";
 
 const PRIMARY_NAV = [
   { href: "/dashboard",    label: "Dashboard",    icon: LayoutDashboard },
   { href: "/whatsapp",     label: "WhatsApp",     icon: MessageCircle },
+  { href: "/leads",        label: "Leads",        icon: Users },
   { href: "/appointments", label: "Appointments", icon: CalendarCheck },
 ];
 
@@ -84,12 +85,6 @@ export default function Sidebar() {
         </div>
       </div>
 
-      {/* Footer */}
-      <div className="px-5 py-3" style={{ borderTop: "1px solid var(--border-light)" }}>
-        <p className="text-[10px] text-center" style={{ color: "var(--text-tertiary)" }}>
-          Groq · WhatsApp · Google Calendar
-        </p>
-      </div>
     </aside>
   );
 }

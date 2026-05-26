@@ -84,6 +84,21 @@ export async function GET() {
       ? Math.round((responseTimes.reduce((a, b) => a + b, 0) / responseTimes.length) * 10) / 10
       : 0;
 
+    // Stage distribution — shows where leads currently are / where they dropped off
+    const stageOrder = [
+      { stage: "greeting",              label: "Greeted" },
+      { stage: "collecting_name",       label: "Gave Name" },
+      { stage: "collecting_concern",    label: "Gave Concern" },
+      { stage: "collecting_phone",      label: "Gave Phone" },
+      { stage: "collecting_datetime",   label: "Gave Date" },
+      { stage: "confirmed",             label: "Booked ✓" },
+      { stage: "declined",              label: "Declined" },
+    ];
+    const stageDistribution = stageOrder.map(({ stage, label }) => ({
+      stage: label,
+      count: conversations.filter(c => c.stage === stage).length,
+    }));
+
     return NextResponse.json({
       funnel: { total, engaged, detailsProvided, booked },
       peakHours,
@@ -91,7 +106,7 @@ export async function GET() {
       avgMsgsToBook,
       avgResponseTime,
       botResponseRate,
-      messageSplit: { bot, human, customer },
+      stageDistribution,
       dayData,
     });
   } catch (err) {
