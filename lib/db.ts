@@ -4,14 +4,36 @@ import path from "path";
 
 export type LeadStatus = "new" | "cold" | "warm" | "hot" | "booked" | "not_interested";
 
+export type ConversationStage =
+  | "greeting"
+  | "asked_intent"
+  | "collecting_name"
+  | "collecting_concern"
+  | "collecting_phone"
+  | "collecting_datetime"
+  | "checking_availability"
+  | "suggesting_alternative"
+  | "confirmed"
+  | "declined";
+
+export interface AppointmentData {
+  name?: string;
+  concern?: string;
+  phone?: string;
+  preferredDatetime?: string;
+  confirmedDatetime?: string;
+  calendarEventId?: string;
+}
+
 export interface Contact {
   id: string;
   phone: string;
   name: string;
   status: LeadStatus;
+  stage: ConversationStage;
+  appointmentData: AppointmentData;
   createdAt: string;
   lastContactAt: string;
-  followUpSentAt?: string;
 }
 
 export interface Message {
@@ -29,6 +51,8 @@ export interface Conversation {
   contactPhone: string;
   contactName: string;
   status: LeadStatus;
+  stage: ConversationStage;
+  appointmentData: AppointmentData;
   messageCount: number;
   lastMessageAt: string;
   lastMessage: string;
@@ -57,7 +81,10 @@ export async function getDb(): Promise<Low<DbSchema>> {
   return dbInstance;
 }
 
-export async function findOrCreateConversation(phone: string, name: string): Promise<{ contact: Contact; conversation: Conversation }> {
+export async function findOrCreateConversation(
+  phone: string,
+  name: string
+): Promise<{ contact: Contact; conversation: Conversation }> {
   const db = await getDb();
   await db.read();
 
@@ -68,6 +95,8 @@ export async function findOrCreateConversation(phone: string, name: string): Pro
       phone,
       name,
       status: "new",
+      stage: "greeting",
+      appointmentData: {},
       createdAt: new Date().toISOString(),
       lastContactAt: new Date().toISOString(),
     };
@@ -84,6 +113,8 @@ export async function findOrCreateConversation(phone: string, name: string): Pro
       contactPhone: phone,
       contactName: name,
       status: contact.status,
+      stage: contact.stage,
+      appointmentData: contact.appointmentData,
       messageCount: 0,
       lastMessageAt: new Date().toISOString(),
       lastMessage: "",
@@ -97,7 +128,12 @@ export async function findOrCreateConversation(phone: string, name: string): Pro
   return { contact, conversation };
 }
 
-export async function addMessage(conversationId: string, from: Message["from"], content: string, waMessageId?: string): Promise<Message> {
+export async function addMessage(
+  conversationId: string,
+  from: Message["from"],
+  content: string,
+  waMessageId?: string
+): Promise<Message> {
   const db = await getDb();
   await db.read();
 
@@ -117,22 +153,33 @@ export async function addMessage(conversationId: string, from: Message["from"], 
     conv.messageCount += 1;
     conv.lastMessageAt = message.timestamp;
     conv.lastMessage = content.slice(0, 80);
-    conv.isRead = from === "customer" ? false : conv.isRead;
+    if (from === "customer") conv.isRead = false;
   }
 
   await db.write();
   return message;
 }
 
-export async function updateLeadStatus(contactId: string, status: LeadStatus): Promise<void> {
+export async function updateContact(
+  contactId: string,
+  updates: Partial<Pick<Contact, "status" | "stage" | "appointmentData" | "name">>
+): Promise<void> {
   const db = await getDb();
   await db.read();
 
   const contact = db.data.contacts.find((c) => c.id === contactId);
-  if (contact) contact.status = status;
+  if (contact) Object.assign(contact, updates);
 
   const conv = db.data.conversations.find((c) => c.contactId === contactId);
-  if (conv) conv.status = status;
+  if (conv) {
+    if (updates.status) conv.status = updates.status;
+    if (updates.stage) conv.stage = updates.stage;
+    if (updates.appointmentData) conv.appointmentData = { ...conv.appointmentData, ...updates.appointmentData };
+    if (updates.name && updates.name !== "Unknown") {
+      conv.contactName = updates.name;
+      if (contact) contact.name = updates.name;
+    }
+  }
 
   await db.write();
 }

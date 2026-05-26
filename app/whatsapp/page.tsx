@@ -5,7 +5,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 import ConversationList from "@/components/whatsapp/ConversationList";
 import ChatWindow from "@/components/whatsapp/ChatWindow";
 import { MessageCircle } from "lucide-react";
-import { LeadStatus } from "@/lib/db";
+import { LeadStatus, AppointmentData } from "@/lib/db";
 
 interface Conversation {
   id: string;
@@ -13,6 +13,8 @@ interface Conversation {
   contactName: string;
   contactPhone: string;
   status: LeadStatus;
+  stage: string;
+  appointmentData: AppointmentData;
   lastMessage: string;
   lastMessageAt: string;
   messageCount: number;

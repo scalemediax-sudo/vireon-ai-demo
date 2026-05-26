@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { format } from "date-fns";
-import { Send, Bot, User, UserCircle, ChevronDown } from "lucide-react";
-import { LeadStatus } from "@/lib/db";
+import { Send, Bot, User, UserCircle, ChevronDown, CalendarCheck, Phone, Stethoscope } from "lucide-react";
+import { LeadStatus, AppointmentData } from "@/lib/db";
 
 interface Message {
   id: string;
@@ -17,6 +17,8 @@ interface Conversation {
   contactName: string;
   contactPhone: string;
   status: LeadStatus;
+  stage?: string;
+  appointmentData?: AppointmentData;
 }
 
 const statusConfig: Record<LeadStatus, { label: string; cls: string }> = {
@@ -100,6 +102,28 @@ export default function ChatWindow({ conversation, messages, onSend, onStatusCha
           )}
         </div>
       </div>
+
+      {/* Appointment Info Bar */}
+      {conversation.appointmentData?.confirmedDatetime && (
+        <div className="px-5 py-2.5 bg-emerald-900/20 border-b border-emerald-500/20 flex items-center gap-4 text-xs">
+          <div className="flex items-center gap-1.5 text-emerald-400">
+            <CalendarCheck className="w-3.5 h-3.5" />
+            <span className="font-medium">{conversation.appointmentData.confirmedDatetime}</span>
+          </div>
+          {conversation.appointmentData.concern && (
+            <div className="flex items-center gap-1.5 text-white/50">
+              <Stethoscope className="w-3.5 h-3.5" />
+              <span>{conversation.appointmentData.concern}</span>
+            </div>
+          )}
+          {conversation.appointmentData.phone && (
+            <div className="flex items-center gap-1.5 text-white/50">
+              <Phone className="w-3.5 h-3.5" />
+              <span>{conversation.appointmentData.phone}</span>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Messages */}
       <div className="flex-1 overflow-y-auto px-5 py-4 space-y-3" style={{ background: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\"), linear-gradient(to bottom, #0a0f1a, #0d1424)" }}>

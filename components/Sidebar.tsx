@@ -21,7 +21,7 @@ export default function Sidebar() {
         </div>
         <div>
           <p className="text-white font-bold text-sm leading-tight">Vireon AI</p>
-          <p className="text-white/40 text-xs">Lead Automation</p>
+          <p className="text-white/40 text-xs">Clinic Assistant</p>
         </div>
       </div>
 
@@ -48,7 +48,7 @@ export default function Sidebar() {
 
       {/* Footer */}
       <div className="px-4 py-4 border-t border-white/10">
-        <p className="text-white/30 text-xs text-center">Powered by Groq + WhatsApp API</p>
+        <p className="text-white/30 text-xs text-center">Powered by Groq + Google Calendar</p>
       </div>
     </aside>
   );

@@ -99,7 +99,7 @@ export default function DashboardPage() {
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="text-white text-2xl font-bold">Dashboard</h1>
-          <p className="text-white/40 text-sm mt-0.5">WhatsApp AI lead automation overview</p>
+          <p className="text-white/40 text-sm mt-0.5">WhatsApp AI appointment booking overview</p>
         </div>
         <div className="flex items-center gap-2">
           <button
@@ -132,16 +132,16 @@ export default function DashboardPage() {
         <MetricCard
           title="Appointments Booked"
           value={metrics?.statusCounts.booked ?? 0}
-          subtitle="Ready for call"
+          subtitle="Confirmed on calendar"
           color="green"
           icon={<CalendarCheck className="w-5 h-5 text-emerald-400" />}
         />
         <MetricCard
-          title="Hot Leads"
-          value={metrics?.statusCounts.hot ?? 0}
-          subtitle="High intent"
-          color="red"
-          icon={<Flame className="w-5 h-5 text-red-400" />}
+          title="In Progress"
+          value={(metrics?.statusCounts.warm ?? 0) + (metrics?.statusCounts.hot ?? 0)}
+          subtitle="Collecting details"
+          color="orange"
+          icon={<Flame className="w-5 h-5 text-orange-400" />}
         />
         <MetricCard
           title="Not Interested"
