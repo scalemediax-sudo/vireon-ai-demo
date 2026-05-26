@@ -1,7 +1,10 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { MessageCircle, CalendarCheck, ThumbsDown, Flame, Snowflake, Sun, RefreshCw, Database } from "lucide-react";
+import {
+  MessageCircle, CalendarCheck, Clock, UserX,
+  RefreshCw, Database, TrendingUp, Users
+} from "lucide-react";
 import MetricCard from "@/components/dashboard/MetricCard";
 import MonthlyChart from "@/components/dashboard/MonthlyChart";
 import LeadStatusPie from "@/components/dashboard/LeadStatusPie";
@@ -9,13 +12,8 @@ import RecentLeads from "@/components/dashboard/RecentLeads";
 
 interface Metrics {
   statusCounts: {
-    total: number;
-    new: number;
-    cold: number;
-    warm: number;
-    hot: number;
-    booked: number;
-    not_interested: number;
+    total: number; new: number; cold: number;
+    warm: number; hot: number; booked: number; not_interested: number;
   };
   totalMessages: number;
   responseRate: number;
@@ -41,11 +39,10 @@ export default function DashboardPage() {
 
   const fetchData = useCallback(async () => {
     try {
-      const [metricsRes, convsRes] = await Promise.all([
-        fetch("/api/metrics"),
-        fetch("/api/conversations"),
+      const [m, c] = await Promise.all([
+        fetch("/api/metrics").then(r => r.json()),
+        fetch("/api/conversations").then(r => r.json()),
       ]);
-      const [m, c] = await Promise.all([metricsRes.json(), convsRes.json()]);
       setMetrics(m);
       setConversations(Array.isArray(c) ? c : []);
     } catch (e) {
@@ -71,48 +68,64 @@ export default function DashboardPage() {
     }
   };
 
-  const pieData = metrics
-    ? [
-        { name: "Cold", value: metrics.statusCounts.cold, color: "#3b82f6" },
-        { name: "Warm", value: metrics.statusCounts.warm, color: "#f97316" },
-        { name: "Hot", value: metrics.statusCounts.hot, color: "#ef4444" },
-        { name: "Booked", value: metrics.statusCounts.booked, color: "#10b981" },
-        { name: "Not Interested", value: metrics.statusCounts.not_interested, color: "#6b7280" },
-        { name: "New", value: metrics.statusCounts.new, color: "#8b5cf6" },
-      ]
-    : [];
+  const pieData = metrics ? [
+    { name: "Booked",    value: metrics.statusCounts.booked,        color: "#30d158" },
+    { name: "Collecting", value: metrics.statusCounts.warm + metrics.statusCounts.hot, color: "#ff9f0a" },
+    { name: "New",       value: metrics.statusCounts.new + metrics.statusCounts.cold,  color: "#0071e3" },
+    { name: "Declined",  value: metrics.statusCounts.not_interested, color: "#aeaeb2" },
+  ] : [];
+
+  const bookingRate = metrics && metrics.statusCounts.total > 0
+    ? Math.round((metrics.statusCounts.booked / metrics.statusCounts.total) * 100)
+    : 0;
 
   if (loading) {
     return (
       <div className="flex items-center justify-center h-full">
         <div className="text-center">
-          <div className="w-8 h-8 border-2 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-          <p className="text-white/40 text-sm">Loading dashboard...</p>
+          <div className="w-7 h-7 border-2 rounded-full animate-spin mx-auto mb-3" style={{ borderColor: "var(--border)", borderTopColor: "var(--blue)" }} />
+          <p className="text-sm" style={{ color: "var(--text-tertiary)" }}>Loading...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="p-6 max-w-7xl mx-auto">
+    <div className="p-8 max-w-6xl mx-auto">
       {/* Header */}
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-start justify-between mb-8">
         <div>
-          <h1 className="text-white text-2xl font-bold">Dashboard</h1>
-          <p className="text-white/40 text-sm mt-0.5">WhatsApp AI appointment booking overview</p>
+          <h1 className="text-2xl font-semibold" style={{ color: "var(--text-primary)", letterSpacing: "-0.02em" }}>
+            Overview
+          </h1>
+          <p className="text-sm mt-0.5" style={{ color: "var(--text-tertiary)" }}>
+            WhatsApp AI appointment booking · auto-updates every 15s
+          </p>
         </div>
         <div className="flex items-center gap-2">
           <button
             onClick={handleSeed}
             disabled={seeding}
-            className="flex items-center gap-2 px-3 py-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-white/60 hover:text-white text-xs transition-colors disabled:opacity-50"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all"
+            style={{
+              background: "var(--surface)",
+              border: "1px solid var(--border-light)",
+              color: "var(--text-secondary)",
+              boxShadow: "var(--shadow-sm)",
+            }}
           >
             <Database className="w-3.5 h-3.5" />
-            {seeding ? "Seeding..." : "Load Demo Data"}
+            {seeding ? "Loading..." : "Demo Data"}
           </button>
           <button
             onClick={fetchData}
-            className="flex items-center gap-2 px-3 py-2 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg text-white/60 hover:text-white text-xs transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all"
+            style={{
+              background: "var(--surface)",
+              border: "1px solid var(--border-light)",
+              color: "var(--text-secondary)",
+              boxShadow: "var(--shadow-sm)",
+            }}
           >
             <RefreshCw className="w-3.5 h-3.5" />
             Refresh
@@ -120,70 +133,79 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* Metric Cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+      {/* Primary metrics */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-4">
         <MetricCard
           title="Total Conversations"
           value={metrics?.statusCounts.total ?? 0}
           subtitle="All time"
-          color="blue"
-          icon={<MessageCircle className="w-5 h-5 text-blue-400" />}
+          accent="var(--blue)"
+          accentLight="var(--blue-light)"
+          icon={<Users className="w-4 h-4" />}
         />
         <MetricCard
           title="Appointments Booked"
           value={metrics?.statusCounts.booked ?? 0}
           subtitle="Confirmed on calendar"
-          color="green"
-          icon={<CalendarCheck className="w-5 h-5 text-emerald-400" />}
+          accent="var(--green)"
+          accentLight="var(--green-light)"
+          icon={<CalendarCheck className="w-4 h-4" />}
         />
         <MetricCard
-          title="In Progress"
-          value={(metrics?.statusCounts.warm ?? 0) + (metrics?.statusCounts.hot ?? 0)}
-          subtitle="Collecting details"
-          color="orange"
-          icon={<Flame className="w-5 h-5 text-orange-400" />}
-        />
-        <MetricCard
-          title="Not Interested"
-          value={metrics?.statusCounts.not_interested ?? 0}
-          subtitle="Closed out"
-          color="gray"
-          icon={<ThumbsDown className="w-5 h-5 text-slate-400" />}
-        />
-      </div>
-
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        <MetricCard
-          title="Warm Leads"
-          value={metrics?.statusCounts.warm ?? 0}
-          subtitle="Engaged, building trust"
-          color="orange"
-          icon={<Sun className="w-5 h-5 text-orange-400" />}
-        />
-        <MetricCard
-          title="Cold Leads"
-          value={metrics?.statusCounts.cold ?? 0}
-          subtitle="Early stage"
-          color="purple"
-          icon={<Snowflake className="w-5 h-5 text-violet-400" />}
-        />
-        <MetricCard
-          title="Total Messages"
-          value={metrics?.totalMessages ?? 0}
-          subtitle="Sent + received"
-          color="blue"
-          icon={<MessageCircle className="w-5 h-5 text-blue-400" />}
+          title="Booking Rate"
+          value={`${bookingRate}%`}
+          subtitle="Conversations → bookings"
+          accent="var(--purple)"
+          accentLight="var(--purple-light)"
+          icon={<TrendingUp className="w-4 h-4" />}
         />
         <MetricCard
           title="Unread Chats"
           value={metrics?.unreadCount ?? 0}
           subtitle="Needs attention"
-          color="yellow"
-          icon={<MessageCircle className="w-5 h-5 text-yellow-400" />}
+          accent="var(--orange)"
+          accentLight="var(--orange-light)"
+          icon={<MessageCircle className="w-4 h-4" />}
         />
       </div>
 
-      {/* Charts */}
+      {/* Secondary metrics */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <MetricCard
+          title="Collecting Details"
+          value={(metrics?.statusCounts.warm ?? 0) + (metrics?.statusCounts.hot ?? 0)}
+          subtitle="In progress"
+          accent="var(--orange)"
+          accentLight="var(--orange-light)"
+          icon={<Clock className="w-4 h-4" />}
+        />
+        <MetricCard
+          title="New Enquiries"
+          value={(metrics?.statusCounts.new ?? 0) + (metrics?.statusCounts.cold ?? 0)}
+          subtitle="Just started"
+          accent="var(--blue)"
+          accentLight="var(--blue-light)"
+          icon={<Users className="w-4 h-4" />}
+        />
+        <MetricCard
+          title="Declined"
+          value={metrics?.statusCounts.not_interested ?? 0}
+          subtitle="Not interested"
+          accent="var(--text-tertiary)"
+          accentLight="var(--surface-2)"
+          icon={<UserX className="w-4 h-4" />}
+        />
+        <MetricCard
+          title="Total Messages"
+          value={metrics?.totalMessages ?? 0}
+          subtitle="Sent + received"
+          accent="var(--purple)"
+          accentLight="var(--purple-light)"
+          icon={<MessageCircle className="w-4 h-4" />}
+        />
+      </div>
+
+      {/* Charts row */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
         <div className="lg:col-span-2">
           <MonthlyChart data={metrics?.monthlyData ?? []} />
@@ -191,7 +213,7 @@ export default function DashboardPage() {
         <LeadStatusPie data={pieData} />
       </div>
 
-      {/* Recent Conversations */}
+      {/* Recent conversations */}
       <RecentLeads conversations={conversations} />
     </div>
   );

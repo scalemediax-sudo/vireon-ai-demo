@@ -6,14 +6,14 @@ import Sidebar from "@/components/Sidebar";
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
 
 export const metadata: Metadata = {
-  title: "Vireon AI — Lead Automation Dashboard",
-  description: "WhatsApp AI lead qualification and appointment booking",
+  title: "Vireon AI — Clinic Assistant",
+  description: "WhatsApp AI appointment booking for clinics",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${geist.variable} h-full`}>
-      <body className="h-full bg-[#0a0f1a] text-white flex antialiased">
+      <body className="h-full flex antialiased" style={{ background: "var(--bg)" }}>
         <Sidebar />
         <main className="flex-1 overflow-auto">{children}</main>
       </body>

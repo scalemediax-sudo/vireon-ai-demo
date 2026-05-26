@@ -2,41 +2,46 @@ interface MetricCardProps {
   title: string;
   value: number | string;
   subtitle?: string;
-  color: "blue" | "green" | "orange" | "red" | "purple" | "yellow" | "gray";
+  accent: string;
+  accentLight: string;
   icon: React.ReactNode;
+  trend?: number;
 }
 
-const colorMap = {
-  blue: "from-blue-500/20 to-blue-600/5 border-blue-500/30 text-blue-400",
-  green: "from-emerald-500/20 to-emerald-600/5 border-emerald-500/30 text-emerald-400",
-  orange: "from-orange-500/20 to-orange-600/5 border-orange-500/30 text-orange-400",
-  red: "from-red-500/20 to-red-600/5 border-red-500/30 text-red-400",
-  purple: "from-violet-500/20 to-violet-600/5 border-violet-500/30 text-violet-400",
-  yellow: "from-yellow-500/20 to-yellow-600/5 border-yellow-500/30 text-yellow-400",
-  gray: "from-slate-500/20 to-slate-600/5 border-slate-500/30 text-slate-400",
-};
-
-const iconBg = {
-  blue: "bg-blue-500/20",
-  green: "bg-emerald-500/20",
-  orange: "bg-orange-500/20",
-  red: "bg-red-500/20",
-  purple: "bg-violet-500/20",
-  yellow: "bg-yellow-500/20",
-  gray: "bg-slate-500/20",
-};
-
-export default function MetricCard({ title, value, subtitle, color, icon }: MetricCardProps) {
+export default function MetricCard({ title, value, subtitle, accent, accentLight, icon, trend }: MetricCardProps) {
   return (
-    <div className={`bg-gradient-to-br ${colorMap[color]} border rounded-xl p-4 backdrop-blur-sm`}>
-      <div className="flex items-start justify-between">
-        <div>
-          <p className="text-white/50 text-xs font-medium uppercase tracking-wider">{title}</p>
-          <p className="text-white text-3xl font-bold mt-1">{value}</p>
-          {subtitle && <p className="text-white/40 text-xs mt-1">{subtitle}</p>}
+    <div
+      className="rounded-2xl p-5 transition-shadow duration-200 hover:shadow-md"
+      style={{
+        background: "var(--surface)",
+        border: "1px solid var(--border-light)",
+        boxShadow: "var(--shadow-sm)",
+      }}
+    >
+      <div className="flex items-start justify-between mb-3">
+        <div
+          className="w-9 h-9 rounded-xl flex items-center justify-center"
+          style={{ background: accentLight }}
+        >
+          <div style={{ color: accent }}>{icon}</div>
         </div>
-        <div className={`${iconBg[color]} p-2.5 rounded-lg`}>{icon}</div>
+        {trend !== undefined && (
+          <span
+            className="text-xs font-medium px-2 py-0.5 rounded-full"
+            style={{
+              background: trend >= 0 ? "var(--green-light)" : "var(--red-light)",
+              color: trend >= 0 ? "var(--green)" : "var(--red)",
+            }}
+          >
+            {trend >= 0 ? "+" : ""}{trend}%
+          </span>
+        )}
       </div>
+      <p className="text-3xl font-bold tracking-tight" style={{ color: "var(--text-primary)", letterSpacing: "-0.02em" }}>
+        {value}
+      </p>
+      <p className="text-sm font-medium mt-0.5" style={{ color: "var(--text-primary)" }}>{title}</p>
+      {subtitle && <p className="text-xs mt-0.5" style={{ color: "var(--text-tertiary)" }}>{subtitle}</p>}
     </div>
   );
 }
