@@ -79,6 +79,10 @@ async function getRedis() {
   return new Redis({ url, token });
 }
 
+// ── In-memory cache (30s TTL) — keeps Redis commands well under the 10k/day free tier ──
+let dataCache: { data: DbSchema; ts: number } | null = null;
+const CACHE_TTL_MS = 30_000;
+
 // ── Lowdb fallback ─────────────────────────────────────────────────────────
 let dbInstance: Low<DbSchema> | null = null;
 async function getLowDb(): Promise<Low<DbSchema>> {
@@ -95,6 +99,9 @@ export async function getDb(): Promise<Low<DbSchema>> {
 }
 
 async function readAll(): Promise<DbSchema> {
+  if (dataCache && Date.now() - dataCache.ts < CACHE_TTL_MS) {
+    return dataCache.data;
+  }
   const redis = await getRedis();
   if (redis) {
     const [contacts, conversations, messages] = await Promise.all([
@@ -102,11 +109,13 @@ async function readAll(): Promise<DbSchema> {
       redis.get<Conversation[]>("conversations"),
       redis.get<Message[]>("messages"),
     ]);
-    return {
+    const data = {
       contacts: contacts ?? [],
       conversations: conversations ?? [],
       messages: messages ?? [],
     };
+    dataCache = { data, ts: Date.now() };
+    return data;
   }
   const db = await getLowDb();
   await db.read();
@@ -114,6 +123,7 @@ async function readAll(): Promise<DbSchema> {
 }
 
 async function writeAll(data: DbSchema): Promise<void> {
+  dataCache = null; // invalidate cache on every write
   const redis = await getRedis();
   if (redis) {
     await Promise.all([

@@ -67,7 +67,7 @@ export default function AppointmentsPage() {
 
   useEffect(() => {
     fetchAppointments();
-    const t = setInterval(fetchAppointments, 15000);
+    const t = setInterval(fetchAppointments, 60000);
     return () => clearInterval(t);
   }, [fetchAppointments]);
 

@@ -1,6 +1,17 @@
 import { google } from "googleapis";
 import { addMinutes, addHours, format, parseISO } from "date-fns";
 
+const SHARED_CALENDAR_NAME = "Clinic Appointments — Vireon AI";
+const CLINIC_OWNER_EMAIL =
+  process.env.CLINIC_OWNER_EMAIL ??
+  process.env.GMAIL_USER ??
+  "sharmadhruvesh645@gmail.com";
+
+const SLOT_DURATION = 30; // minutes
+
+// Module-level cache so we only run the create/share logic once per instance
+let resolvedCalendarId: string | null = null;
+
 function getCalendarClient() {
   const credentials = process.env.GOOGLE_SERVICE_ACCOUNT_JSON;
   if (!credentials) return null;
@@ -18,8 +29,72 @@ function getCalendarClient() {
   }
 }
 
-const CALENDAR_ID = process.env.GOOGLE_CALENDAR_ID ?? "primary";
-const SLOT_DURATION = 30; // minutes
+async function getOrCreateCalendarId(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  calendar: any
+): Promise<string> {
+  if (resolvedCalendarId) return resolvedCalendarId;
+
+  // Try Redis cache
+  try {
+    const url = process.env.UPSTASH_REDIS_REST_URL;
+    const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+    if (url && token) {
+      const { Redis } = await import("@upstash/redis");
+      const redis = new Redis({ url, token });
+      const cached = await redis.get<string>("clinic_calendar_id");
+      if (cached) {
+        resolvedCalendarId = cached;
+        return cached;
+      }
+    }
+  } catch (_) { /* Redis unavailable — proceed */ }
+
+  try {
+    // Check if calendar already exists in the service account's list
+    const list = await calendar.calendarList.list();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const existing = list.data.items?.find((c: any) => c.summary === SHARED_CALENDAR_NAME);
+
+    let calId: string;
+    if (existing) {
+      calId = existing.id;
+    } else {
+      // Create a new calendar owned by the service account
+      const created = await calendar.calendars.insert({
+        requestBody: { summary: SHARED_CALENDAR_NAME, timeZone: "Asia/Kolkata" },
+      });
+      calId = created.data.id!;
+
+      // Share it with the clinic owner so it appears in their Google Calendar
+      await calendar.acl.insert({
+        calendarId: calId,
+        requestBody: {
+          role: "writer",
+          scope: { type: "user", value: CLINIC_OWNER_EMAIL },
+        },
+      });
+      console.log(`[Calendar] Created & shared "${SHARED_CALENDAR_NAME}" → ${CLINIC_OWNER_EMAIL}`);
+    }
+
+    // Cache in Redis (30 days TTL)
+    try {
+      const url = process.env.UPSTASH_REDIS_REST_URL;
+      const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+      if (url && token) {
+        const { Redis } = await import("@upstash/redis");
+        const redis = new Redis({ url, token });
+        await redis.set("clinic_calendar_id", calId, { ex: 86400 * 30 });
+      }
+    } catch (_) { /* non-fatal */ }
+
+    resolvedCalendarId = calId;
+    return calId;
+  } catch (e) {
+    console.error("[Calendar] Failed to resolve calendar ID:", e);
+    return "primary";
+  }
+}
 
 export interface SlotCheckResult {
   available: boolean;
@@ -40,6 +115,7 @@ export async function checkAndBookSlot(
     return mockBookSlot(preferredTime, patientName, concern);
   }
 
+  const calendarId = await getOrCreateCalendarId(calendar);
   const start = preferredTime;
   const end = addMinutes(preferredTime, SLOT_DURATION);
 
@@ -49,11 +125,11 @@ export async function checkAndBookSlot(
       requestBody: {
         timeMin: start.toISOString(),
         timeMax: addHours(start, 4).toISOString(),
-        items: [{ id: CALENDAR_ID }],
+        items: [{ id: calendarId }],
       },
     });
 
-    const busy = freeBusy.data.calendars?.[CALENDAR_ID]?.busy ?? [];
+    const busy = freeBusy.data.calendars?.[calendarId]?.busy ?? [];
     const isSlotBusy = busy.some((b) => {
       const busyStart = new Date(b.start!);
       const busyEnd = new Date(b.end!);
@@ -61,9 +137,8 @@ export async function checkAndBookSlot(
     });
 
     if (!isSlotBusy) {
-      // Book the slot
-      const event = await calendar.events.insert({
-        calendarId: CALENDAR_ID,
+      await calendar.events.insert({
+        calendarId,
         requestBody: {
           summary: `Clinic Appointment — ${patientName}`,
           description: `Patient: ${patientName}\nPhone: ${patientPhone}\nConcern: ${concern}`,

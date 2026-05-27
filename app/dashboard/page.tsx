@@ -19,7 +19,8 @@ interface Metrics {
   };
   totalMessages: number;
   bookingRate: number;
-  monthlyData: { month: string; conversations: number; booked: number }[];
+  chartData: { label: string; conversations: number; booked: number }[];
+  chartTitle: string;
   unreadCount: number;
 }
 
@@ -64,7 +65,7 @@ export default function DashboardPage() {
 
   useEffect(() => {
     fetchData(range);
-    const interval = setInterval(() => fetchData(range), 15000);
+    const interval = setInterval(() => fetchData(range), 60000);
     return () => clearInterval(interval);
   }, [fetchData, range]);
 
@@ -248,7 +249,7 @@ export default function DashboardPage() {
       {/* Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
         <div className="lg:col-span-2">
-          <MonthlyChart data={metrics?.monthlyData ?? []} />
+          <MonthlyChart data={metrics?.chartData ?? []} title={metrics?.chartTitle} />
         </div>
         <LeadStatusPie data={pieData} />
       </div>

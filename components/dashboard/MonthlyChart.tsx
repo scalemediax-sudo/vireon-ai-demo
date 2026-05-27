@@ -3,7 +3,8 @@
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
 
 interface MonthlyChartProps {
-  data: { month: string; conversations: number; booked: number }[];
+  data: { label: string; conversations: number; booked: number }[];
+  title?: string;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -30,7 +31,7 @@ function CustomTooltip({ active, payload, label }: any) {
   );
 }
 
-export default function MonthlyChart({ data }: MonthlyChartProps) {
+export default function MonthlyChart({ data, title = "Monthly Overview" }: MonthlyChartProps) {
   return (
     <div
       className="rounded-2xl p-6"
@@ -42,7 +43,7 @@ export default function MonthlyChart({ data }: MonthlyChartProps) {
     >
       <div className="flex items-center justify-between mb-5">
         <div>
-          <h2 className="font-semibold text-sm" style={{ color: "var(--text-primary)" }}>Monthly Overview</h2>
+          <h2 className="font-semibold text-sm" style={{ color: "var(--text-primary)" }}>{title}</h2>
           <p className="text-xs mt-0.5" style={{ color: "var(--text-tertiary)" }}>Conversations vs booked appointments</p>
         </div>
         <div className="flex items-center gap-4">
@@ -68,7 +69,7 @@ export default function MonthlyChart({ data }: MonthlyChartProps) {
           </defs>
           <CartesianGrid strokeDasharray="3 3" stroke="var(--border-light)" vertical={false} />
           <XAxis
-            dataKey="month"
+            dataKey="label"
             tick={{ fill: "var(--text-tertiary)", fontSize: 11 }}
             axisLine={false} tickLine={false}
           />

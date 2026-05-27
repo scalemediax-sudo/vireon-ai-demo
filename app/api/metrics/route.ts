@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { readData } from "@/lib/db";
-import { format, subMonths, startOfMonth, endOfMonth, startOfDay, endOfDay, subDays } from "date-fns";
+import type { Contact, Conversation } from "@/lib/db";
+import { format, subMonths, startOfMonth, endOfMonth, startOfDay, endOfDay, subDays, addDays } from "date-fns";
 
 function getDateRange(range: string | null): { start: Date; end: Date } | null {
   const now = new Date();
@@ -10,6 +11,74 @@ function getDateRange(range: string | null): { start: Date; end: Date } | null {
     case "month": return { start: startOfMonth(now), end: endOfMonth(now) };
     default:      return null;
   }
+}
+
+type ChartPoint = { label: string; conversations: number; booked: number };
+
+function buildChartData(
+  conversations: Conversation[],
+  contacts: Contact[],
+  range: string | null
+): { points: ChartPoint[]; title: string } {
+  const now = new Date();
+
+  if (range === "today") {
+    const points = Array.from({ length: 11 }, (_, i) => {
+      const h = i + 9;
+      const dayBase = startOfDay(now);
+      const hourStart = new Date(dayBase.getFullYear(), dayBase.getMonth(), dayBase.getDate(), h);
+      const hourEnd   = new Date(dayBase.getFullYear(), dayBase.getMonth(), dayBase.getDate(), h + 1);
+      const label = h === 12 ? "12pm" : h < 12 ? `${h}am` : `${h - 12}pm`;
+      return {
+        label,
+        conversations: conversations.filter(c => { const d = new Date(c.createdAt); return d >= hourStart && d < hourEnd; }).length,
+        booked: contacts.filter(c => { const d = new Date(c.createdAt); return c.status === "booked" && d >= hourStart && d < hourEnd; }).length,
+      };
+    });
+    return { points, title: "Today — Hourly Breakdown" };
+  }
+
+  if (range === "week") {
+    const points = Array.from({ length: 7 }, (_, i) => {
+      const date  = subDays(now, 6 - i);
+      const start = startOfDay(date);
+      const end   = endOfDay(date);
+      return {
+        label: format(date, "EEE"),
+        conversations: conversations.filter(c => { const d = new Date(c.createdAt); return d >= start && d <= end; }).length,
+        booked: contacts.filter(c => { const d = new Date(c.createdAt); return c.status === "booked" && d >= start && d <= end; }).length,
+      };
+    });
+    return { points, title: "Last 7 Days — Daily Breakdown" };
+  }
+
+  if (range === "month") {
+    const monthStart = startOfMonth(now);
+    const monthEnd   = endOfMonth(now);
+    const points = Array.from({ length: 4 }, (_, i) => {
+      const wStart = addDays(monthStart, i * 7);
+      const wEnd   = i < 3 ? addDays(wStart, 6) : monthEnd;
+      return {
+        label: `Week ${i + 1}`,
+        conversations: conversations.filter(c => { const d = new Date(c.createdAt); return d >= wStart && d <= wEnd; }).length,
+        booked: contacts.filter(c => { const d = new Date(c.createdAt); return c.status === "booked" && d >= wStart && d <= wEnd; }).length,
+      };
+    });
+    return { points, title: "This Month — Weekly Breakdown" };
+  }
+
+  // All time: last 6 months
+  const points = Array.from({ length: 6 }, (_, i) => {
+    const date  = subMonths(now, 5 - i);
+    const start = startOfMonth(date);
+    const end   = endOfMonth(date);
+    return {
+      label: format(date, "MMM"),
+      conversations: conversations.filter(c => { const d = new Date(c.createdAt); return d >= start && d <= end; }).length,
+      booked: contacts.filter(c => { const d = new Date(c.createdAt); return c.status === "booked" && d >= start && d <= end; }).length,
+    };
+  });
+  return { points, title: "Monthly Overview" };
 }
 
 export async function GET(req: NextRequest) {
@@ -42,23 +111,14 @@ export async function GET(req: NextRequest) {
       not_interested: filteredContacts.filter(c => c.status === "not_interested").length,
     };
 
-    // Monthly chart always uses all-time data regardless of filter
-    const monthlyData = Array.from({ length: 6 }, (_, i) => {
-      const date  = subMonths(new Date(), 5 - i);
-      const start = startOfMonth(date);
-      const end   = endOfMonth(date);
-      return {
-        month: format(date, "MMM"),
-        conversations: conversations.filter(c => { const d = new Date(c.createdAt); return d >= start && d <= end; }).length,
-        booked: contacts.filter(c => { const d = new Date(c.createdAt); return c.status === "booked" && d >= start && d <= end; }).length,
-      };
-    });
+    const { points: chartData, title: chartTitle } = buildChartData(conversations, contacts, range);
 
     return NextResponse.json({
       statusCounts,
       totalMessages: filteredMessages.length,
       bookingRate: total > 0 ? Math.round((booked / total) * 100) : 0,
-      monthlyData,
+      chartData,
+      chartTitle,
       unreadCount: conversations.filter(c => !c.isRead).length,
     });
   } catch (err) {

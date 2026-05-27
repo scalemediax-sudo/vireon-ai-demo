@@ -50,21 +50,19 @@ function WhatsAppInner() {
     if (data.conversation) {
       setActiveConv(data.conversation);
       setMessages(data.messages ?? []);
-      // Refresh list to update read status
-      fetchConversations();
     }
-  }, [fetchConversations]);
+  }, []);
 
   useEffect(() => {
     fetchConversations();
-    const interval = setInterval(fetchConversations, 8000);
+    const interval = setInterval(fetchConversations, 30000);
     return () => clearInterval(interval);
   }, [fetchConversations]);
 
   useEffect(() => {
     if (selectedId) {
       fetchMessages(selectedId);
-      const interval = setInterval(() => fetchMessages(selectedId), 5000);
+      const interval = setInterval(() => fetchMessages(selectedId), 20000);
       return () => clearInterval(interval);
     } else {
       setActiveConv(null);
